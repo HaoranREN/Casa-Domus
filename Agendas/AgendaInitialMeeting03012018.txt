@@ -1,0 +1,26 @@
+CasaDomus
+Title: AgendaInitialMeeting03012018
+Author: Elia Deppe
+Date:   03/01/2018
+
+Members:
+    William Gao     wgao1@umbc.edu
+    Haoran Ren      rhaoran1@umbc.edu
+    Cynthia Chou    cchou3@umbc.edu
+    James Williams  hd38933@umbc.edu
+    Ryan Coleman    tk34176@umbc.edu
+    Elia Deppe      cdeppe1@umbc.edu
+
+Client: Prof. Charles Nicholas
+
+Agenda for Initial Meeting: The purpose of this meeting is to get info from our client about what they want to be done with this software
+
+Questions:
+    - What is main objective of the software? (AKA what does it do?)
+    - What are the main requirements of the software? What must it do?
+        - Clarify on any requirements that are vague or misleading. Make them better.
+    - Are there any secondary/tertiary requirements of the software?
+        - Clarify on any requirements that are vague or misleading. Make them better.
+    - Are there any general design principles that we should follow?
+        - This question may box us in; however, we may come to find this out via our requirements.
+    - Are we concerned with our software being secure? If so what standard are we adhering to?
