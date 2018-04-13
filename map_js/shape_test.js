@@ -1,16 +1,3 @@
-function loadJSON(file, callback) {   
-
-   var xobj = new XMLHttpRequest();
-   xobj.overrideMimeType("application/json");
-   xobj.open('GET', file, true);
-   xobj.onreadystatechange = function () {
-         if (xobj.readyState == 4 && xobj.status == "200") {
-           callback(xobj.responseText);
-         }
-   };
-   xobj.send(null);  
-}
-
 function initializeMap() {
 
   var mapDiv = document.getElementById('googft-mapCanvas');
@@ -23,22 +10,12 @@ function initializeMap() {
         disableDefaultUI: true,
         maxZoom: 6,
         minZoom: 5,
+	draggable: false,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-  
-  //map.data.loadGeoJson('google.json');
-  
-  try{
-    var rawJson = loadJson(
-    var geojson = JSON.parse(google)
-    map.data.addGeoJson('google.json');
-  }
-  catch(error){
-    alert(error);
-  }
-
-
+   
+  map.data.loadGeoJson('counties.json');
   /*
   layer = new google.maps.FusionTablesLayer({
     map: map,
@@ -54,7 +31,8 @@ function initializeMap() {
     }
   });
   */
-      //debug to get center of map after dragging
+  
+  //debug to get center of map when drag finishes
   //map.addListener('dragend',function() {alert('Lat: ' + map.getCenter().lat() + '\nLng: ' + map.getCenter().lng());});
 }
 
