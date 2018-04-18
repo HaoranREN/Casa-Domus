@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+
+  <!- Include the AngularJS JavaScript file in the HTML page ->
+  <head>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
+  </head>
+
+  <!- Indicates what part of the HTML contains the AngularJS app ->
+  <body ng-app = "myApp">
+
+    <!- The view is here ->
+    <div ng-controller = "HelloController">
+      <h2>This was made with: {{helloTo.title}}!</h2>
+    </div>
+
+    <!- The controller is here ->
+    <script>
+      angular.module("myApp", [])
+
+      .controller("HelloController", function($scope) {
+        $scope.helloTo = {};
+        $scope.helloTo.title = "AngularJS";
+      });
+    </script>
+
+  </body>
+</html>
