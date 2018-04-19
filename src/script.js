@@ -33,6 +33,12 @@ var COUNTY_INFO_FILEPATH = "./resources/County_Information.txt"
             to null.
         int winterAverage: Average winter temperature (Fahrenheit). Initialized 
             to null.
+            
+        double offset: How far off this particular county is from the users
+            choice. Initialized to null.
+    Changes:
+        Elia Deppe - 4/19/2018: added variable offset along with getters and
+            setters
 */
 
 class County {
@@ -50,6 +56,8 @@ class County {
         
         this.summerAverage = null;
         this.winterAverage = null;
+        
+        this.offset = null;
     }
     
     //----------------------setter methods----------------------
@@ -89,6 +97,10 @@ class County {
     
     set winterAverage(value) {
         this.winterAverage = value;
+    }
+    
+    set offset(value) {
+        this.offset = value;
     }
     
     //extended
@@ -135,6 +147,10 @@ class County {
     
     get winterAverage() {
         return this.winterAverage;
+    }
+    
+    get offset() {
+        return this.offset;
     }
     //--------------------end getter methods--------------------
 }
@@ -189,6 +205,7 @@ function ReadCountyInformation() {
         state, and geocentrial coordinates.
 */
 function ParseCountyInformation(line) {
+    var newCounty = new County();
     
 }
 
