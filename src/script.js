@@ -4,7 +4,7 @@
 */
 
 //------------------------globals start------------------------
-var COUNTY_INFO_FILEPATH = "filepath"
+var COUNTY_INFO_FILEPATH = "./resources/County_Information.txt"
 //-------------------------globals end-------------------------
 
 /*
@@ -139,6 +139,7 @@ class County {
     //--------------------end getter methods--------------------
 }
 
+var countyList = new Array();
 
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
@@ -150,12 +151,48 @@ slider.oninput = function() {
 }
 
 
-//------------------------start read files------------------------
-function readCountyInformation() {
+//-------------------start read file functions--------------------
+/*
+    Function
+    Name: ReadCountyInformation
+    Author(s): Elia Deppe
+    Date: 4/18/2018
+    Description: Reads from County_Information.txt and stores the counties into
+        countyList.
+    Sources:
+        - https://gist.github.com/Arahnoid/9925725
+*/
+function ReadCountyInformation() {
+    let str = "";
+    let txtFile = new File(COUNTY_INFO_FILEPATH);
+    let eof = false;
+    txtFile.open("r");
+    while(!eof) {
+        str = txtFile.readln();
+        if(str[0] == "#") {
+            eof = true;
+        }
+        else {
+            ParseCountyInformation(str);
+        }
+    }
+}
+
+/*
+    Function
+    Name: ParseCountyInformation
+    Author(s): Elia Deppe
+    Date: 4/18/2018
+    Parameters:
+        - String line: Line read from the file.
+    Description: Parses the string stored in line to retrieve the county's name,
+        state, and geocentrial coordinates.
+*/
+function ParseCountyInformation(line) {
     
 }
 
-//-------------------------end read files-------------------------
+//--------------------end read file functions--------------------
 
 
 //-------------------start load html functions-------------------
@@ -168,7 +205,7 @@ function readCountyInformation() {
     Description: Loads questionnaire.html
 */
 function LoadQuestionnaire() {
-    readCountyInformation();
+    ReadCountyInformation();
     window.location.href = "questionnaire.html";
 }
 
