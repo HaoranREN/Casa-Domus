@@ -38,7 +38,7 @@
 
   <!- Controller ->
   <script>
-    var incomeJSON = [];
+    var incomeJSON;
 
     // Papa Parse
     Papa.parse(incomeData,
@@ -46,9 +46,8 @@
         header: true,
         dynmicTyping: true,
         complete: function (results) {
-          // Log completed results
-          incomeJSON.push(results.data)
-          console.log(incomeJSON);
+          incomeJSON = JSON.parse(JSON.stringify(results.data));
+          console.log(incomeJSON)
         }
       });
 
@@ -62,8 +61,8 @@
       $scope.medianHHIncome = "46309";
 
       $scope.update = function () {
-        $scope.areaName = incomeJSON[0][$scope.countyNum].Area_name;
-        $scope.medianHHIncome = incomeJSON[0][$scope.countyNum].Median_Household_Income_2016;
+        $scope.areaName = incomeJSON[$scope.countyNum].Area_name;
+        $scope.medianHHIncome = incomeJSON[$scope.countyNum].Median_Household_Income_2016;
       }
     });
   </script>
