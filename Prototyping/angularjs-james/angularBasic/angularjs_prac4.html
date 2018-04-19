@@ -1,0 +1,80 @@
+<html>
+
+  <head>
+    <title>AngularJS Filters</title>
+  </head>
+
+  <!- View ->
+  <body>
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+    <h2>Currency Filters</h2>
+
+    <div ng-app = "mainApp" ng-controller = "customerController">
+
+      <!- Inputs for data here ->
+      <table border = "0">
+        <tr>
+
+          <td>Enter first name:
+          <input type = "text" ng-model = "customer.firstName"></td>
+
+        </tr>
+
+        <tr>
+
+          <td>Enter last name:
+          <input type = "text" ng-model = "customer.lastName"></td>
+
+        </tr>
+
+        <tr>
+
+          <td>Enter an ammount of money: </td>
+          <td><input type = "text" ng-model = "customer.fee"></td>
+
+        </tr>
+      </table>
+      <br/>
+
+      <!- Outputs for data here ->
+      <table border = "0">
+        <tr>
+
+          <td>Name: </td><td>{{customer.fullName()}}</td>
+
+        </tr>
+
+        <tr>
+
+          <td>You owe: </td><td>{{customer.fee | currency}}
+          </td>
+
+        </tr>
+      </table>
+    </div>
+
+
+    <!- Controller ->
+    <script>
+      var mainApp = angular.module("mainApp", []);
+
+      mainApp.controller('customerController', function($scope) {
+        $scope.customer = {
+          firstName: "James",
+          lastName: "Williams",
+          fee: 500,
+
+          fullName: function() {
+            var customerObject;
+            customerObject = $scope.customer;
+            return customerObject.firstName + " " + customerObject.lastName;
+          }
+        };
+      });
+
+    </script>
+
+  </body>
+</html>
