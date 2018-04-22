@@ -4,7 +4,7 @@
 */
 
 //------------------------globals start------------------------
-var COUNTY_INFO_FILEPATH = "./resources/County_Information.txt"
+var COUNTY_INFO_FILEPATH = "file:///C:/Users/zerof/Documents/Coding%20Projects/Websites/Casa-Domus/src/County_Information.txt"
 //-------------------------globals end-------------------------
 
 /*
@@ -15,49 +15,56 @@ var COUNTY_INFO_FILEPATH = "./resources/County_Information.txt"
     Description: The County class holds the information that is relevant to
         this project for a county.
     Variables:
-        string name: Name of the county. Initialized to null.
-        string state: State the county resides in. Initialized to null.
+        string name: Name of the county. Initialized to 0.
+        string state: State the county resides in. Initialized to 0.
+        
+        int FIPS: FIPS number of the county. Initialized to 0.
+        
         double[] coordinates: Central coordinates of the county. Initialized to 
-            [null, null].
+            [0, 0].
             
         int medianProperty: Median property value in that area. Initialized to 
-            null.
+            0.
         int medianRent: Median cost of rent in that area. Initialized to null.
         
         int medianIncome: Median Household Income for that county. Initialized 
-            to null.
+            to 0.
         
-        double coli: Cost of Living Index. Initialized to null.
+        double coli: Cost of Living Index. Initialized to 0.
         
         int summerAverage: Average summer temperature (Fahrenheit). Initialized 
-            to null.
+            to 0.
         int winterAverage: Average winter temperature (Fahrenheit). Initialized 
-            to null.
+            to 0.
             
         double offset: How far off this particular county is from the users
-            choice. Initialized to null.
+            choice. Initialized to 0.
     Changes:
         Elia Deppe - 4/19/2018: added variable offset along with getters and
             setters
+        Elia Deppe - 4/21/2018: added variable FIPS along with getters and
+            setters. Changed initializations to emptpy strings/0s
 */
 
 class County {
     constructor() {
-        this.name = null;
-        this.state = null;
-        this.coordinates = [null, null];
+        this.name = "";
+        this.state = "";
+        this.FIPS = 0;
+        
+        this.coordinates = [0, 0];
     
-        this.medianProperty = null;
-        this.medianRent = null;
+        this.medianProperty = 0;
+        this.medianRent = 0;
 
-        this.medianIncome = null;
+        this.medianIncome = 0;
         
-        this.coli = null;
+        this.coli = 0;
         
-        this.summerAverage = null;
-        this.winterAverage = null;
+        this.summerAverage = 0;
+        this.winterAverage = 0;
         
-        this.offset = null;
+        this.offset = 0;
     }
     
     //----------------------setter methods----------------------
@@ -68,6 +75,10 @@ class County {
     
     set state(value) {
         this.state = value;
+    }
+    
+    set FIPS(value) {
+        this.FIPS = value;
     }
     
     set coordinates(value) {
@@ -121,6 +132,10 @@ class County {
         return this.state;
     }
     
+    get FIPS() {
+        return this.FIPS;
+    }
+    
     get coordinates() {
         return this.coordinates;
     }
@@ -157,14 +172,14 @@ class County {
 
 var countyList = new Array();
 
-var slider = document.getElementById("myRange");
+/*var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 output.innerHTML = slider.value; // Display the default slider value
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
     output.innerHTML = this.value;
-}
+}*/
 
 
 //-------------------start read file functions--------------------
@@ -180,17 +195,13 @@ slider.oninput = function() {
 */
 function ReadCountyInformation() {
     let str = "";
-    let txtFile = new File(COUNTY_INFO_FILEPATH);
+    let txtFile = new File("County_Information.txt", 'r');
     let eof = false;
     txtFile.open("r");
     while(!eof) {
         str = txtFile.readln();
-        if(str[0] == "#") {
-            eof = true;
-        }
-        else {
-            ParseCountyInformation(str);
-        }
+        console.log(str);
+        //ParseCountyInformation(str);
     }
 }
 
@@ -206,6 +217,36 @@ function ReadCountyInformation() {
 */
 function ParseCountyInformation(line) {
     var newCounty = new County();
+    let switchCount = 0;
+    var i;
+    var string;
+    for(i = 0; i < line.length; i++) {
+        if(line[i] == " ") {
+            switchCount++;
+        }
+        else {
+            if(switchCount == 1) {
+                i = i;
+            }
+            
+            else if(switchCount == 2) {
+                i = i;
+            }
+            
+            else if(switchCount == 3) {
+                i = i;
+            }
+            
+            else if(switchCount == 4) {
+                i = i;
+            }
+            
+            else if(switchCount == 5) {
+                i = i;
+            }
+        }
+    }
+    
     
 }
 
@@ -267,3 +308,23 @@ function LoadMap() {
     Changes:
         - <author> <date>: <description>
 */
+
+function myFunction() {
+        window.location.href = "survey.html";
+        function2();
+        console.log("hi");
+    }
+    
+function function2() {
+    var rawfile = new XMLHttpRequest();
+    rawfile.open("GET", COUNTY_INFO_FILEPATH, false);
+    rawfile.onreadystatechange = function() {
+        if(rawfile.readyState === 4) {
+            if(rawfile.status === 200 || rawfile.status == 0) {
+                var allText = rawfile.responseText;
+                console.log(allText);
+            }
+        }
+    }
+    rawfile.send(null);
+}
