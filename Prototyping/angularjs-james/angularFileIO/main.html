@@ -33,14 +33,20 @@
         <td>{{medianHHIncome}}</td>
       </tr>
 
+      <tr>
+        <td>Median Property Value: </td>
+        <td>{{medianProperty}}</td>
+      </tr>
+
     </table>
   </div>
 
   <!- Controller ->
   <script>
     var incomeJSON;
+    var propertyJSON;
 
-    // Papa Parse
+    // Papa Parse Median Income Data
     Papa.parse(incomeData,
       {
         header: true,
@@ -51,18 +57,31 @@
         }
       });
 
+      // Papa Parse Median Property Value
+      Papa.parse(propertyData,
+      {
+        header: true,
+        dynamicTyping: true,
+        complete: function (results) {
+          propertyJSON = JSON.parse(JSON.stringify(results.data))
+          console.log(propertyJSON)
+        }
+      });
+
     // Controller
     var mainApp = angular.module("mainApp", []);
 
     mainApp.controller('incomeController', function ($scope) {
       // Default Values
       $scope.countyNum = 0;
-      $scope.areaName = "Alabama";
-      $scope.medianHHIncome = "46309";
+      $scope.areaName = "Autauga County, AL";
+      $scope.medianHHIncome = "54487";
+      $scope.medianProperty = "141000";
 
       $scope.update = function () {
         $scope.areaName = incomeJSON[$scope.countyNum].Area_name;
         $scope.medianHHIncome = incomeJSON[$scope.countyNum].Median_Household_Income_2016;
+        $scope.medianProperty = propertyJSON[$scope.countyNum].Median_Property_Value_2016;
       }
     });
   </script>
