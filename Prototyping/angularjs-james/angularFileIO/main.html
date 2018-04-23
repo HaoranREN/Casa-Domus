@@ -24,6 +24,11 @@
     <table border="0">
 
       <tr>
+        <td>State: </td>
+        <td>{{state}}</td>
+      </tr>
+
+      <tr>
         <td>Area Name: </td>
         <td>{{areaName}}</td>
       </tr>
@@ -38,6 +43,16 @@
         <td>{{medianProperty}}</td>
       </tr>
 
+      <tr>
+        <td>Cost of Living Index for {{state}}: </td>
+        <td>{{costOfLiving}}</td>
+      </tr>
+
+      <tr>
+        <td>Cost of Groceries Index for {{state}}: </td>
+        <td>{{costOfGroceries}}</td>
+      </tr>
+
     </table>
   </div>
 
@@ -45,6 +60,7 @@
   <script>
     var incomeJSON;
     var propertyJSON;
+    var livingJSON;
 
     // Papa Parse Median Income Data
     Papa.parse(incomeData,
@@ -57,8 +73,8 @@
         }
       });
 
-      // Papa Parse Median Property Value
-      Papa.parse(propertyData,
+    // Papa Parse Median Property Value
+    Papa.parse(propertyData,
       {
         header: true,
         dynamicTyping: true,
@@ -68,20 +84,45 @@
         }
       });
 
+    // Papa Parse Cost of Living Value
+    Papa.parse(livingData,
+      {
+        header: true,
+        dynamicTyping: true,
+        complete: function (results) {
+          livingJSON = JSON.parse(JSON.stringify(results.data))
+          console.log(livingJSON)
+        }
+      });
+
     // Controller
     var mainApp = angular.module("mainApp", []);
 
     mainApp.controller('incomeController', function ($scope) {
-      // Default Values
+      // Default Values (county 0 is Autauga County, AL)
       $scope.countyNum = 0;
+      $scope.state = "AL";
       $scope.areaName = "Autauga County, AL";
       $scope.medianHHIncome = "54487";
       $scope.medianProperty = "141000";
+      $scope.costOfLiving = "90.3";
+      $scope.costOfGroceries = "97.4"
 
+      // Updates the values on the view
       $scope.update = function () {
+        $scope.state = incomeJSON[$scope.countyNum].State;
         $scope.areaName = incomeJSON[$scope.countyNum].Area_name;
         $scope.medianHHIncome = incomeJSON[$scope.countyNum].Median_Household_Income_2016;
         $scope.medianProperty = propertyJSON[$scope.countyNum].Median_Property_Value_2016;
+
+        // Loop through states in living JSON until current state is found
+        for (var key in livingJSON) {
+          if (livingJSON[key].State === $scope.state) {
+            $scope.costOfLiving = livingJSON[key].Index;
+            $scope.costOfGroceries = livingJSON[key].Grocery;
+          }
+        }
+
       }
     });
   </script>
