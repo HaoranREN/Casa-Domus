@@ -16,9 +16,13 @@
   <div ng-app="mainApp" ng-controller="incomeController">
 
     <!- Input ->
-    Enter a number of a county:
+    <!-- Enter a number of a county:
     <input type="number" ng-model="countyNum">
-    <button ng-click="update()">Submit</button>
+    <button ng-click="update()">Submit</button> -->
+
+    Enter the name of a county:
+    <input type="string" ng-model="countyName">
+    <button ng-click="searchCounty()">Submit</button>
 
     <!- Outputs ->
     <table border="0">
@@ -121,8 +125,13 @@
     var mainApp = angular.module("mainApp", []);
 
     mainApp.controller('incomeController', function ($scope) {
+      // Global reference to this controller
+      var myCtr = this;
+
+      // Default Values for search
+      $scope.countyName = "Imperial County";
+
       // Default Values (county 0 is Autauga County, AL)
-      $scope.countyNum = 0;
       $scope.state = "AL";
       $scope.areaName = "Autauga County, AL";
       $scope.medianHHIncome = "54487";
@@ -132,15 +141,45 @@
       $scope.rent1bed = "742";
       $scope.rent4bed = "1558";
 
-      // Updates the values on the view
-      $scope.update = function () {
-        $scope.state = incomeJSON[$scope.countyNum].State;
-        $scope.areaName = incomeJSON[$scope.countyNum].Area_name;
-        $scope.medianHHIncome = incomeJSON[$scope.countyNum].Median_Household_Income_2016;
-        $scope.medianProperty = propertyJSON[$scope.countyNum].Median_Property_Value_2016;
-        $scope.rent1bed = rentJSON[$scope.countyNum].rent50_1;
-        $scope.rent4bed = rentJSON[$scope.countyNum].rent50_4;
+      $scope.searchCounty = function () {
+        // Reset Variables
+        $scope.state = null;
+        $scope.areaName = null;
+        $scope.medianHHIncome = null;
+        $scope.medianProperty = null;
+        $scope.propName = null;
+        $scope.rent1bed = null;
+        $scope.rent4bed = null;
+        $scope.costOfLiving = null;
+        $scope.costOfGroceries = null;
 
+
+        // Find area name in rentJSON
+        for (var key = 0; key < rentJSON.length; key++) {
+          if (angular.lowercase($scope.countyName) === angular.lowercase(rentJSON[key].cntyname)) {
+            $scope.state = rentJSON[key].state_alpha;
+            $scope.areaName = rentJSON[key].cntyname + ", " + rentJSON[key].state_alpha;
+
+            $scope.rent1bed = rentJSON[key].rent50_1;
+            $scope.rent4bed = rentJSON[key].rent50_4;
+          }
+        }
+
+        // match the name found in rentJSON with information in incomeJSON
+        for (var key = 0; key < incomeJSON.length; key++) {
+          if ($scope.areaName === incomeJSON[key].Area_name) {
+            $scope.medianHHIncome = incomeJSON[key].Median_Household_Income_2016;
+          }
+        }
+
+        // match the name found in the rentJSON with the information in propertyJSON
+        for (var key = 0; key < propertyJSON.length; key++) {
+          if ($scope.areaName === propertyJSON[key].geo_name) {
+            console.log(key);
+            $scope.medianProperty = propertyJSON[key].Median_Property_Value_2016;
+          }
+        }
+        
         // Loop through states in living JSON until current state is found
         for (var key in livingJSON) {
           if (livingJSON[key].State === $scope.state) {
