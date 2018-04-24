@@ -10,6 +10,7 @@
   <script src="http://127.0.0.1/~MarbleCake/papaparse.js" type="text/javascript"></script>
   <script src="http://127.0.0.1/~MarbleCake/searchCounty.js" type="text/javascript"></script>
   <script src="http://127.0.0.1/~MarbleCake/resources/data.js" type="text/javascript"></script>
+  <script src="http://127.0.0.1/~MarbleCake/sortCounty.js" type="text/javascript"></script>
 
   <!- Angularjs View ->
   <div ng-app="mainApp" ng-controller="surveyController">
@@ -52,7 +53,7 @@
 
       <tr>
         <td>
-          <button ng-click="calculateDistance()">Submit</button>
+          <button ng-click="execute()">Submit</button>
         </td>
       </tr>
     </table>
@@ -62,6 +63,8 @@
   </div>
 
   <script>
+    var userResults = [];
+
     // Makes all json county data available
     parseCountyData();
 
@@ -69,8 +72,6 @@
     var mainApp = angular.module("mainApp", []);
 
     mainApp.controller('surveyController', function ($scope) {
-      // Distances of counties to user's preferences
-      $scope.userResults = [];
       // String with Output
       $scope.resultString = "";
 
@@ -80,71 +81,27 @@
       $scope.userLiving = 136.5;
       $scope.userRent = 1700;
 
-      $scope.calculateDistance = function () {
-        // contains candidate county to compare against
-        $scope.county = null;
-        $scope.userResults = [];
-
-        // Loop through all counties and calculate distances
-        for (var key = 0; key < countyList.length; key++) {
-          countyToSearch = countyList[key].countyName;
-          stateToSearch = countyList[key].state;
-
-          $scope.county = searchCounty(countyToSearch, stateToSearch);
-
-          $scope.dist = 0;
-
-          // Only calculate the distance of those counties that have these values
-          if (($scope.county.medianProperty) &&
-            ($scope.county.costOfLiving) &&
-            ($scope.county.medianHHIncome) &&
-            ($scope.county.rent1bed)) {
-
-            $scope.dist = Math.hypot(($scope.county.medianProperty - $scope.userProperty),
-              ($scope.county.costOfLiving - $scope.userLiving),
-              ($scope.county.medianHHIncome - $scope.userIncome),
-              ($scope.county.rent1bed - $scope.userRent)
-            );
-          }
-
-          // only insert if the distance exists
-          if (!Number.isNaN($scope.dist) && $scope.dist != 0) {
-            $scope.userResults.push({
-              state: rentJSON[key].state_alpha,
-              areaName: rentJSON[key].cntyname + ", " + rentJSON[key].state_alpha,
-              countyName: rentJSON[key].cntyname,
-              distance: $scope.dist,
-
-              medianProperty: $scope.county.medianProperty,
-              costOfLiving: $scope.county.costOfLiving,
-              medianHHIncome: $scope.county.medianHHIncome,
-              rent1Bed: $scope.county.rent1bed
-            });
-          }
-        }
-
-        // Sort counties byt distance
-        $scope.userResults.sort(sortByProperty('distance'));
-
-        console.log($scope.userResults);
-
+      $scope.execute = function () {
+        // call get results HERE
+        userResults = calculateDistance($scope.userIncome, $scope.userProperty, $scope.userLiving, $scope.userRent);
+        console.log(userResults);
         this.printResults();
       }
 
-      // the most barbaric way to print the results
       $scope.printResults = function () {
+        // the most barbaric way to print the results
         $scope.resultString = "";
         $scope.resultString += "Here are some Suggestions: ";
-        $scope.resultString += $scope.userResults[0].areaName + " ";
-        $scope.resultString += $scope.userResults[1].areaName + " ";
-        $scope.resultString += $scope.userResults[2].areaName + " ";
-        $scope.resultString += $scope.userResults[3].areaName + " ";
-        $scope.resultString += $scope.userResults[4].areaName + " ";
-        $scope.resultString += $scope.userResults[5].areaName + " ";
-        $scope.resultString += $scope.userResults[6].areaName + " ";
-        $scope.resultString += $scope.userResults[7].areaName + " ";
-        $scope.resultString += $scope.userResults[8].areaName + " ";
-        $scope.resultString += $scope.userResults[9].areaName + " ";
+        $scope.resultString += userResults[0].areaName + " ";
+        $scope.resultString += userResults[1].areaName + " ";
+        $scope.resultString += userResults[2].areaName + " ";
+        $scope.resultString += userResults[3].areaName + " ";
+        $scope.resultString += userResults[4].areaName + " ";
+        $scope.resultString += userResults[5].areaName + " ";
+        $scope.resultString += userResults[6].areaName + " ";
+        $scope.resultString += userResults[7].areaName + " ";
+        $scope.resultString += userResults[8].areaName + " ";
+        $scope.resultString += userResults[9].areaName + " ";
       }
     });
   </script>
