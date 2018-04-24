@@ -27,7 +27,7 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
                 state: rentJSON[key].state_alpha,
                 areaName: rentJSON[key].cntyname + ", " + rentJSON[key].state_alpha,
                 countyName: rentJSON[key].cntyname,
-                distance: dist,
+                //distance: dist,
                 medianProperty: county.medianProperty,
                 costOfLiving: county.costOfLiving,
                 medianHHIncome: county.medianHHIncome,
@@ -36,7 +36,7 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
         }
     }
     // Sort counties byt distance
-    userResults.sort(sortByProperty('distance'));
+    //userResults.sort(sortByProperty('distance'));
 
     return userResults;
 }
