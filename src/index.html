@@ -70,7 +70,7 @@
 
     mainApp.controller('surveyController', function ($scope) {
       // Distances of counties to user's preferences
-      $scope.userDist = [];
+      $scope.userResults = [];
       // String with Output
       $scope.resultString = "";
 
@@ -83,7 +83,7 @@
       $scope.calculateDistance = function () {
         // contains candidate county to compare against
         $scope.county = null;
-        $scope.userDist = [];
+        $scope.userResults = [];
 
         // Loop through all counties and calculate distances
         for (var key = 0; key < countyList.length; key++) {
@@ -96,9 +96,9 @@
 
           // Only calculate the distance of those counties that have these values
           if (($scope.county.medianProperty) &&
-          ($scope.county.costOfLiving) &&
-          ($scope.county.medianHHIncome) &&
-          ($scope.county.rent1bed)) {
+            ($scope.county.costOfLiving) &&
+            ($scope.county.medianHHIncome) &&
+            ($scope.county.rent1bed)) {
 
             $scope.dist = Math.hypot(($scope.county.medianProperty - $scope.userProperty),
               ($scope.county.costOfLiving - $scope.userLiving),
@@ -109,18 +109,24 @@
 
           // only insert if the distance exists
           if (!Number.isNaN($scope.dist) && $scope.dist != 0) {
-            $scope.userDist.push({
+            $scope.userResults.push({
               state: rentJSON[key].state_alpha,
               areaName: rentJSON[key].cntyname + ", " + rentJSON[key].state_alpha,
               countyName: rentJSON[key].cntyname,
-              distance: $scope.dist
+              distance: $scope.dist,
+
+              medianProperty: $scope.county.medianProperty,
+              costOfLiving: $scope.county.costOfLiving,
+              medianHHIncome: $scope.county.medianHHIncome,
+              rent1Bed: $scope.county.rent1bed
             });
           }
         }
 
-        $scope.userDist.sort(sortByProperty('distance'));
+        // Sort counties byt distance
+        $scope.userResults.sort(sortByProperty('distance'));
 
-        console.log($scope.userDist);
+        console.log($scope.userResults);
 
         this.printResults();
       }
@@ -129,16 +135,16 @@
       $scope.printResults = function () {
         $scope.resultString = "";
         $scope.resultString += "Here are some Suggestions: ";
-        $scope.resultString += $scope.userDist[0].areaName + " ";
-        $scope.resultString += $scope.userDist[1].areaName + " ";
-        $scope.resultString += $scope.userDist[2].areaName + " ";
-        $scope.resultString += $scope.userDist[3].areaName + " ";
-        $scope.resultString += $scope.userDist[4].areaName + " ";
-        $scope.resultString += $scope.userDist[5].areaName + " ";
-        $scope.resultString += $scope.userDist[6].areaName + " ";
-        $scope.resultString += $scope.userDist[7].areaName + " ";
-        $scope.resultString += $scope.userDist[8].areaName + " ";
-        $scope.resultString += $scope.userDist[9].areaName + " ";
+        $scope.resultString += $scope.userResults[0].areaName + " ";
+        $scope.resultString += $scope.userResults[1].areaName + " ";
+        $scope.resultString += $scope.userResults[2].areaName + " ";
+        $scope.resultString += $scope.userResults[3].areaName + " ";
+        $scope.resultString += $scope.userResults[4].areaName + " ";
+        $scope.resultString += $scope.userResults[5].areaName + " ";
+        $scope.resultString += $scope.userResults[6].areaName + " ";
+        $scope.resultString += $scope.userResults[7].areaName + " ";
+        $scope.resultString += $scope.userResults[8].areaName + " ";
+        $scope.resultString += $scope.userResults[9].areaName + " ";
       }
     });
   </script>
