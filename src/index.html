@@ -92,24 +92,23 @@
 
           $scope.county = searchCounty(countyToSearch, stateToSearch);
 
-          $scope.dist = NaN;
+          $scope.dist = 0;
 
           // Only calculate the distance of those counties that have these values
-          if (!Number.isNaN($scope.county.medianProperty) &&
-            !Number.isNaN($scope.county.costOfLiving) &&
-            !Number.isNaN($scope.county.medianHHIncome) &&
-            !Number.isNaN($scope.county.rent1bed)) {
-              
-            $scope.dist = Math.sqrt(
-              ($scope.county.medianProperty - $scope.userProperty) ^ 2 +
-              ($scope.county.costOfLiving - $scope.userLiving) ^ 2 +
-              ($scope.county.medianHHIncome - $scope.userIncome) ^ 2 +
-              ($scope.county.rent1bed - $scope.userRent) ^ 2
+          if (($scope.county.medianProperty) &&
+          ($scope.county.costOfLiving) &&
+          ($scope.county.medianHHIncome) &&
+          ($scope.county.rent1bed)) {
+
+            $scope.dist = Math.hypot(($scope.county.medianProperty - $scope.userProperty),
+              ($scope.county.costOfLiving - $scope.userLiving),
+              ($scope.county.medianHHIncome - $scope.userIncome),
+              ($scope.county.rent1bed - $scope.userRent)
             );
           }
 
           // only insert if the distance exists
-          if (!Number.isNaN($scope.dist)) {
+          if (!Number.isNaN($scope.dist) && $scope.dist != 0) {
             $scope.userDist.push({
               state: rentJSON[key].state_alpha,
               areaName: rentJSON[key].cntyname + ", " + rentJSON[key].state_alpha,
