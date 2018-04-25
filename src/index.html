@@ -56,7 +56,7 @@
           <button ng-click="execute()">Submit</button>
         </td>
       </tr>
-      
+
     </table>
 
     <!- Crudely print the top 10 closest counties ->
@@ -87,6 +87,11 @@
         userResults = calculateDistance($scope.userIncome, $scope.userProperty, $scope.userLiving, $scope.userRent);
         console.log(userResults);
         this.printResults();
+      }
+
+      $scope.export = function () {
+        var csv = Papa.unparse(userResults);
+        console.log(csv);
       }
 
       $scope.printResults = function () {

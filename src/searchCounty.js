@@ -53,11 +53,11 @@ function parseCountyData() {
         });
 
     // Push all county names into one list
-    for (var key = 0; key < rentJSON.length; key++) {
+    for (var key = 0; key < propertyJSON.length; key++) {
         countyList.push({
-            state: rentJSON[key].state_alpha, 
-            areaName: rentJSON[key].cntyname + ", " + rentJSON[key].state_alpha,
-            countyName: rentJSON[key].cntyname
+            state: propertyJSON[key].geo_name.substr(-2), 
+            areaName: propertyJSON[key].geo_name,
+            countyName: propertyJSON[key].geo_name.slice(0, -4)
          });
     }
 
