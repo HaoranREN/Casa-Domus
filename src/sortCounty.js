@@ -24,9 +24,9 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
         // only insert if the distance exists
         if (!Number.isNaN(dist) && dist != 0) {
             userResults.push({
-                state: rentJSON[key].state_alpha,
-                areaName: rentJSON[key].cntyname + ", " + rentJSON[key].state_alpha,
-                countyName: rentJSON[key].cntyname,
+                state: countyList[key].state,
+                areaName: countyList[key].areaName,
+                countyName: countyList[key].countyName,
                 distance: dist,
                 medianProperty: county.medianProperty,
                 costOfLiving: county.costOfLiving,
@@ -35,7 +35,7 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
             });
         }
     }
-    // Sort counties byt distance
+    // Sort counties by distance
     userResults.sort(sortByProperty('distance'));
 
     return userResults;
