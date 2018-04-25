@@ -1,3 +1,27 @@
+// Returns the final results of the survey. It's all countied in one JSON object
+// called userResults sorted by their Euclidean distance to the user
+//
+//   Attributes:
+// - state: Abreviation of state where the county lies
+// - areaName: County name and state name (eg. "Baltimore County, MD")
+// - countyName: Full name of the county
+// - medianProperty: The median property value of the county
+// - costOfLiving: The cost of living index of the county
+// - medianHHIncome: The median house hold income of the county
+// - rent1Bed: The 50th percentile cost for renting a 1 bedroom unit in the county
+//
+//    Usage:
+//
+//      userResults[n].{attribute}
+//
+// - Where n is the index of the nth closest matched county 
+//   (userResults[0] has the closest match, userResults[1] has the second closest match, etc)
+// - Where {attribute} is one of the described attributes listed above
+//
+//    Examples:
+//      userResults[0].areaName; -> County and state name of the closest matched county
+//      userResults[3].medianProperty; -> Median property value of the 4th closest matched county
+
 var calculateDistance = function (userIncome, userProperty, userLiving, userRent) {
     // contains candidate county to compare against
     var county = null;
@@ -32,23 +56,6 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
                 costOfLiving: county.costOfLiving,
                 medianHHIncome: county.medianHHIncome,
                 rent1Bed: county.rent1bed,
-                isNull: false
-            });
-        }
-
-        // for the few counties that didn't get a distance, insert them but with a null distance
-        else {
-            console.log(countyList[key]);
-            userResults.push({
-                state: countyList[key].state,
-                areaName: countyList[key].areaName,
-                countyName: countyList[key].countyName,
-                distance: 999999999,
-                medianProperty: county.medianProperty,
-                costOfLiving: county.costOfLiving,
-                medianHHIncome: county.medianHHIncome,
-                rent1Bed: county.rent1bed,
-                isNull: true
             });
         }
     }
