@@ -21,7 +21,7 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
                 (county.rent1bed - userRent)
             );
         }
-        // only insert if the distance exists
+        // insert county with distance if it has a distance (mostly all counties do)
         if (!Number.isNaN(dist) && dist != 0) {
             userResults.push({
                 state: countyList[key].state,
@@ -31,7 +31,24 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
                 medianProperty: county.medianProperty,
                 costOfLiving: county.costOfLiving,
                 medianHHIncome: county.medianHHIncome,
-                rent1Bed: county.rent1bed
+                rent1Bed: county.rent1bed,
+                isNull: false
+            });
+        }
+
+        // for the few counties that didn't get a distance, insert them but with a null distance
+        else {
+            console.log(countyList[key]);
+            userResults.push({
+                state: countyList[key].state,
+                areaName: countyList[key].areaName,
+                countyName: countyList[key].countyName,
+                distance: 999999999,
+                medianProperty: county.medianProperty,
+                costOfLiving: county.costOfLiving,
+                medianHHIncome: county.medianHHIncome,
+                rent1Bed: county.rent1bed,
+                isNull: true
             });
         }
     }
