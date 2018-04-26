@@ -90,6 +90,10 @@ function searchCounty(countyToSearch, stateToSearch) {
             countyName = countyToSearch;
             rent1bed = rentJSON[key].rent50_1;
             rent4bed = rentJSON[key].rent50_4;
+
+            fips2010 = rentJSON[key].fips2010;
+            hu2010 = rentJSON[key].hu2010;
+            population = rentJSON[key].pop2010;
         }
     }
 
@@ -97,6 +101,8 @@ function searchCounty(countyToSearch, stateToSearch) {
     for (var key = 0; key < incomeJSON.length; key++) {
         if (areaName === incomeJSON[key].Area_name || countyName === incomeJSON[key].Area_name) {
             medianHHIncome = incomeJSON[key].Median_Household_Income_2016;
+
+            fipsTxt = incomeJSON[key].FIPStxt;
         }
     }
 
@@ -104,6 +110,8 @@ function searchCounty(countyToSearch, stateToSearch) {
     for (var key = 0; key < propertyJSON.length; key++) {
         if (areaName === propertyJSON[key].geo_name) {
             medianProperty = propertyJSON[key].Median_Property_Value_2016;
+
+            geoID = propertyJSON[key].geo_id;
         }
     }
 
@@ -124,7 +132,12 @@ function searchCounty(countyToSearch, stateToSearch) {
         rent1bed: rent1bed,
         rent4bed: rent4bed,
         costOfLiving: costOfLiving,
-        costOfGroceries: costOfGroceries
+        costOfGroceries: costOfGroceries,
+        population: population,
+        hu2010: hu2010,
+        geoID: geoID,
+        fips2010: fips2010,
+        fipsTxt: fipsTxt
     };
 
     return resultsJSON;

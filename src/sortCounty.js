@@ -56,6 +56,13 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
                 costOfLiving: county.costOfLiving,
                 medianHHIncome: county.medianHHIncome,
                 rent1Bed: county.rent1bed,
+                rent4bed: county.rent4bed,
+                costOfGroceries: county.costOfGroceries,
+                population: county.population,
+                hu2010: county.hu2010,
+                geoID: county.geoID,
+                fips2010: county.fips2010,
+                fipsTxt: county.fipsTxt
             });
         }
     }
