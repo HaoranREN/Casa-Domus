@@ -53,10 +53,10 @@ function initializeMap() {
 }
 
 function colorLerp(t){
-  var startColor = 0;
-  var endColor = 360;
+  var startColor = 10;
+  var endColor = 350;
 
-  return startColor*t + endColor*(t-1);
+  return startColor*t + endColor*(1-t);
 }
 
 function setGradientColors(map){
