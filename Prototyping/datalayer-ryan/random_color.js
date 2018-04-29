@@ -15,23 +15,6 @@ function printNamesToConsole(map){
 	console.log("After");
 }
 
-function printLargestArea(map){
-	var largest;
-
-	map.data.forEach(function(feature){
-		var size = feature.getProperty("ALAND");
-		if(!largest){
-			largest = feature;
-		}else{
-			if(size > largest.getProperty("ALAND")){
-				largest = feature;
-			}
-		}
-	});
-	console.log("Largest County: " + largest.getProperty("NAME"));
-	console.log("Size: " + largest.getProperty("ALAND"));
-}
-
 function initializeMap() {
 
   //get the html and set style where the map will be
@@ -52,41 +35,19 @@ function initializeMap() {
   return map;
 }
 
-function colorLerp(t){
-  var startColor = 0;
-  var endColor = 360;
-
-  return startColor*t + endColor*(t-1);
-}
-
-function setGradientColors(map){
-	var MAX_SIZE = 377030936019; //size in area of Yukon-Koyukuk census area
-	map.data.forEach(function (feature){
-		var countySize = feature.getProperty("ALAND");
-		feature.setProperty("gradient",countySize/MAX_SIZE);
-	});
-}
-
-function getColorOfFeature(feature){
-	var col = colorLerp(feature.getProperty("gradient"));
-	return "hsl(" + col + ",50%,50%)";
-}
-
 //ACTUAL CODE STARTS EXECUTING HERE
+
 google.maps.event.addDomListener(window, 'load',function(){
 	//get our map
 	var map = initializeMap();
 
 	//This timeout is to wait for the map to actually load, this is a hack until I find out
 	// how to send a call back function when initializing the map
-	
-	setTimeout(function () {
-		setGradientColors(map);
-		map.data.setStyle(function (feature) { 
-		  var col = getColorOfFeature(feature);
-		  return {fillColor: col, strokeWeight: 1, fillOpacity: 1.0}; });
-		},2000);
-});
-	
+	//setTimeout(function () {printNamesToConsole(map)},2000);
+	//set the color of each feature (county), randomly
+	map.data.setStyle(function (feature) { return {fillColor: randomColor(),
+						       strokeWeight: 1,
+						       fillOpacity: 1.0}; })
+	});
 
 
