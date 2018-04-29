@@ -1,17 +1,28 @@
+
+//This funcion is currently a test bed for putting data on features
 function printNamesToConsole(map){
 	console.log("Before");
 	map.data.forEach(function(feature){
-		console.log(feature.getProperty("Name"));
+		feature.setProperty("test",8080);
+		var thing = feature.getId();
+		if(thing != null){
+		  console.log(feature.getProperty("test"));
+		}
+		else{
+		  console.log("BAD");
+		}
 	});
 	console.log("After");
 }
 
 function initializeMap() {
 
+  //get the html and set style where the map will be
   var mapDiv = document.getElementById('googft-mapCanvas');
   mapDiv.style.width = '100%';
   mapDiv.style.height = '100%';
       
+  //Make a map and set some variables for it
   var map = new google.maps.Map(mapDiv, {
     center: new google.maps.LatLng(37.85873841173884, -95.87495593749996),
     zoom: 5,
@@ -19,27 +30,25 @@ function initializeMap() {
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
-	/*
-  var map = new google.maps.Map(mapDiv, {
-    center: new google.maps.LatLng(37.85873841173884, -95.87495593749996),
-    zoom: 5,
-        disableDefaultUI: true,
-        maxZoom: 6,
-        minZoom: 5,
-	draggable: false,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });*/
-  map.data.loadGeoJson('geojsondata_v1.json');
+  //load shape data into map and identify each feature (county) of the map by their AFFGEOID
+  map.data.loadGeoJson('county_shapes_fixed.json',{idPropertyName: "AFFGEOID"});
   return map;
-  //debug to get center of map when drag finishes
-  //map.addListener('dragend',function() {alert('Lat: ' + map.getCenter().lat() + '\nLng: ' + map.getCenter().lng());});
 }
 
+//ACTUAL CODE STARTS EXECUTING HERE
+
 google.maps.event.addDomListener(window, 'load',function(){
+	//get our map
 	var map = initializeMap();
+
+	//This timeout is to wait for the map to actually load, this is a hack until I find out
+	// how to send a call back function when initializing the map
 	//setTimeout(function () {printNamesToConsole(map)},2000);
+
+	//set the color of each feature (county), randomly
 	map.data.setStyle(function (feature) { return {fillColor: randomColor(),
-						       strokeWeight: 1}; })
+						       strokeWeight: 1,
+						       fillOpacity: 1.0}; })
 	});
 
 
