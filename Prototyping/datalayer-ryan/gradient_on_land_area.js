@@ -53,14 +53,14 @@ function initializeMap() {
 }
 
 function colorLerp(t){
-  var startColor = 10;
-  var endColor = 350;
+  var startColor = 10; //hsv works on a circle, so we start at degree 10
+  var endColor = 350; //end at degree 350
 
-  return startColor*t + endColor*(1-t);
+  return endColor*t + startColor*(1-t);
 }
 
 function setGradientColors(map){
-	var MAX_SIZE = 377030936019; //size in area of Yukon-Koyukuk census area
+	var MAX_SIZE = 377030936019*1.5; //size in area of Yukon-Koyukuk census area
 	map.data.forEach(function (feature){
 		var countySize = feature.getProperty("ALAND");
 		feature.setProperty("gradient",countySize/MAX_SIZE);
