@@ -12,3 +12,9 @@
     background: -o-linear-gradient( to left top, #02A288, #95D5EC);
     background: linear-gradient( to left top, #02A288, #95D5EC);
 }
+
+#table
+{ 
+ font-size: 22;
+ color: #ffeffe;
+}
