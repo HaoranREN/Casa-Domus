@@ -48,7 +48,7 @@ function initializeMap(divName) {
   });
 
   //load shape data into map and identify each feature (county) of the map by their AFFGEOID
-  map.data.loadGeoJson('county_shapes_fixed.json',{idPropertyName: "AFFGEOID"});
+  map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"});
   return map;
 }
 
@@ -71,8 +71,13 @@ function setGradientColors(map,results){
 }
 
 function getColorOfFeature(feature){
-	var col = colorLerp(feature.getProperty("gradient"));
-	return "hsl(" + col + ",100%,50%)";
+	var gradient = feature.getProperty("gradient");
+	if(gradient){
+	  var col = colorLerp(gradient);
+	  return "hsl(" + col + ",100%,50%)";
+	} else {
+	  return "hsl(0,0%,0%)";
+	}
 }
 
 
