@@ -32,10 +32,10 @@ function printLargestArea(map){
 	console.log("Size: " + largest.getProperty("ALAND"));
 }
 
-function initializeMap() {
+function initializeMap(divName) {
 
   //get the html and set style where the map will be
-  var mapDiv = document.getElementById('googft-mapCanvas');
+  var mapDiv = document.getElementById(divName);
   mapDiv.style.width = '100%';
   mapDiv.style.height = '100%';
       
@@ -53,25 +53,37 @@ function initializeMap() {
 }
 
 function colorLerp(t){
-  var startColor = 10; //hsv works on a circle, so we start at degree 10
-  var endColor = 350; //end at degree 350
+  var startColor = 0; //hsv works on a circle, so we start at degree 10
+  var endColor = 260; //end at degree 350
 
   return endColor*t + startColor*(1-t);
 }
 
-function setGradientColors(map){
-	var MAX_SIZE = 377030936019*1.5; //size in area of Yukon-Koyukuk census area
-	map.data.forEach(function (feature){
-		var countySize = feature.getProperty("ALAND");
-		feature.setProperty("gradient",countySize/MAX_SIZE);
-	});
+function setGradientColors(map,results){
+	var size_of_array = 3220;
+	for (var i=0; i < results.length; i++){
+		//TODO make sure this is right
+		var feature = map.data.getFeatureById(results[i]["geoID"]);
+		if(feature){
+			feature.setProperty("gradient",1-(i/size_of_array));
+		}
+	}
 }
 
 function getColorOfFeature(feature){
 	var col = colorLerp(feature.getProperty("gradient"));
-	return "hsl(" + col + ",50%,50%)";
+	return "hsl(" + col + ",100%,50%)";
 }
 
+
+
+function applyGradient(map){
+	map.data.setStyle(function(feature){
+	  var col = getColorOfFeature(feature);
+	  return { fillColor: col,  strokeWeight: 1, fillOpacity: 1};
+	});
+}
+/*
 //ACTUAL CODE STARTS EXECUTING HERE
 google.maps.event.addDomListener(window, 'load',function(){
 	//get our map
@@ -87,6 +99,6 @@ google.maps.event.addDomListener(window, 'load',function(){
 		  return {fillColor: col, strokeWeight: 1, fillOpacity: 1.0}; });
 		},1000);
 });
-	
+*/	
 
 
