@@ -1,3 +1,4 @@
+var infoWindow = new google.maps.InfoWindow();
 
 //This funcion is currently a test bed for putting data on features
 function printNamesToConsole(map){
@@ -48,7 +49,15 @@ function initializeMap(divName) {
   });
 
   //load shape data into map and identify each feature (county) of the map by their AFFGEOID
-  map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"});
+  map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"}, function() {
+    map.data.addListener('click',function(event){
+      var countyName = event.feature.getProperty("NAME");
+      
+      infoWindow.setPosition(event.latLng);
+      infoWindow.setContent("<h1>"+countyName+"</h1>");
+      infoWindow.open(map);
+    });
+  });
   return map;
 }
 
@@ -88,22 +97,3 @@ function applyGradient(map){
 	  return { fillColor: col,  strokeWeight: 1, fillOpacity: 1};
 	});
 }
-/*
-//ACTUAL CODE STARTS EXECUTING HERE
-google.maps.event.addDomListener(window, 'load',function(){
-	//get our map
-	var map = initializeMap();
-
-	//This timeout is to wait for the map to actually load, this is a hack until I find out
-	// how to send a call back function when initializing the map
-	
-	setTimeout(function () {
-		setGradientColors(map);
-		map.data.setStyle(function (feature) { 
-		  var col = getColorOfFeature(feature);
-		  return {fillColor: col, strokeWeight: 1, fillOpacity: 1.0}; });
-		},1000);
-});
-*/	
-
-
