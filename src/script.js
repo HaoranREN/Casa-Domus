@@ -324,7 +324,11 @@ function myFunction() {
         function2();
         console.log("hi");
     }
-    
+
+function showMap(){
+    window.location.href = "../Prototyping/datalayer+angular-ryan/index.html";
+}
+
 function function2() {
     var txtFile = new XMLHttpRequest();
     txtFile.open('GET', COUNTY_INFO_FILEPATH, false);
