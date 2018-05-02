@@ -1,36 +1,20 @@
 var infoWindow = new google.maps.InfoWindow();
 
-//This funcion is currently a test bed for putting data on features
-function printNamesToConsole(map){
-	console.log("Before");
-	map.data.forEach(function(feature){
-		feature.setProperty("test",8080);
-		var thing = feature.getId();
-		if(thing != null){
-		  console.log(feature.getProperty("test"));
-		}
-		else{
-		  console.log("BAD");
-		}
-	});
-	console.log("After");
-}
+function addInfoWindows(map){
+  map.data.addListener('click',function(event){
+    
+    //we collect feature data here so we could technically pass in user results and display them here as well, would need to compare with GeoId again.
+    var countyName = event.feature.getProperty("NAME");
+    
+    //Set the position of the window on the map
+    infoWindow.setPosition(event.latLng);
+    
+    //set the html of the window TODO: needs to be fixed
+    infoWindow.setContent("<h1>"+countyName+"</h1>");
 
-function printLargestArea(map){
-	var largest;
-
-	map.data.forEach(function(feature){
-		var size = feature.getProperty("ALAND");
-		if(!largest){
-			largest = feature;
-		}else{
-			if(size > largest.getProperty("ALAND")){
-				largest = feature;
-			}
-		}
-	});
-	console.log("Largest County: " + largest.getProperty("NAME"));
-	console.log("Size: " + largest.getProperty("ALAND"));
+    //open's the window on the map
+    infoWindow.open(map);
+  });
 }
 
 function initializeMap(divName) {
@@ -44,30 +28,30 @@ function initializeMap(divName) {
   var map = new google.maps.Map(mapDiv, {
     center: new google.maps.LatLng(37.85873841173884, -95.87495593749996),
     zoom: 5,
-        disableDefaultUI: true,
+    disableDefaultUI: true,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
   //load shape data into map and identify each feature (county) of the map by their AFFGEOID
-  map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"}, function() {
-    map.data.addListener('click',function(event){
-      var countyName = event.feature.getProperty("NAME");
-      
-      infoWindow.setPosition(event.latLng);
-      infoWindow.setContent("<h1>"+countyName+"</h1>");
-      infoWindow.open(map);
-    });
-  });
+  map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"}, addInfoWindows(map));
+  
   return map;
 }
 
+
+//Simple linear interpolation of hue value of hsv
+//t = 1 -> endColor
+//t = 0 -> startColor
 function colorLerp(t){
-  var startColor = 0; //hsv works on a circle, so we start at degree 10
-  var endColor = 260; //end at degree 350
+  var startColor = 0;
+  var endColor = 260;
 
   return endColor*t + startColor*(1-t);
 }
 
+
+//Collects each feature (county) and sets a property in it called gradient
+//Sets the gradient by the position in the array
 function setGradientColors(map,results){
 	var size_of_array = 3220;
 	for (var i=0; i < results.length; i++){
@@ -79,6 +63,7 @@ function setGradientColors(map,results){
 	}
 }
 
+//Returns the proper hsv string needed by CSS3 to give color to feature (county)
 function getColorOfFeature(feature){
 	var gradient = feature.getProperty("gradient");
 	if(gradient){
@@ -90,7 +75,7 @@ function getColorOfFeature(feature){
 }
 
 
-
+//Applys the gradients of each county to the map
 function applyGradient(map){
 	map.data.setStyle(function(feature){
 	  var col = getColorOfFeature(feature);
