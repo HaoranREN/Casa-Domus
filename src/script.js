@@ -4,7 +4,17 @@
 */
 
 //------------------------globals start------------------------
-var COUNTY_INFO_FILEPATH = "file:///C:/Users/zerof/Documents/Coding%20Projects/Websites/Casa-Domus/src/County_Information.txt"
+var COUNTY_INFO_FILEPATH = "https://cdn.rawgit.com/WillyWonkaCocoa/Casa-Domus/master/src/County_Information.txt";
+var slider = document.getElementById("slider");
+if(slider) {
+    slider.addEventListener('input', sliderChange);
+}
+
+function sliderChange() {
+    display.innerHTML = this.value;
+}
+
+var display = document.getElementById("sliderAmount");
 //-------------------------globals end-------------------------
 
 /*
@@ -314,17 +324,38 @@ function myFunction() {
         function2();
         console.log("hi");
     }
-    
+
+function showMap(){
+    window.location.href = "../Prototyping/datalayer+angular-ryan/index.html";
+}
+
 function function2() {
-    var rawfile = new XMLHttpRequest();
-    rawfile.open("GET", COUNTY_INFO_FILEPATH, false);
-    rawfile.onreadystatechange = function() {
-        if(rawfile.readyState === 4) {
-            if(rawfile.status === 200 || rawfile.status == 0) {
-                var allText = rawfile.responseText;
-                console.log(allText);
-            }
+    var txtFile = new XMLHttpRequest();
+    txtFile.open('GET', COUNTY_INFO_FILEPATH, false);
+    txtFile.send(null);
+    console.log("In function 2");
+    txtFile.onreadystatechange = function() {
+        console.log("here")
+        
+        console.log(txtFile.readyState, txtFile,status, txtFile);
+        if(txtFile.readyState === 3) {
+            console.log("Downloading file.")
+        }
+        
+        else if(txtFile.readyState === 4) {
+            console.log("hey");
+            allText = txtFile.responseText;
+            console.log(allText);
         }
     }
-    rawfile.send(null);
+}
+
+function SwitchToSurvey() {
+    window.location.href = "test2.html"
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+        alert('Supported');
+    }
+    else {
+        alert('The File APIs are not fully supported in this browser.');
+    }
 }
