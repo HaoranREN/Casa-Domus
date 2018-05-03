@@ -17,7 +17,7 @@ function addInfoWindows(map){
   });
 }
 
-function initializeMap(divName) {
+function initializeMap(divName, userResults = null) {
 
   //get the html and set style where the map will be
   var mapDiv = document.getElementById(divName);
@@ -33,7 +33,13 @@ function initializeMap(divName) {
   });
 
   //load shape data into map and identify each feature (county) of the map by their AFFGEOID
-  map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"}, addInfoWindows(map));
+  map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"}, function(){
+    addInfoWindows(map);
+    if(userResults){
+      setGradientColors(map,results);
+      applyGradient(map);
+    }
+  });
   
   return map;
 }
