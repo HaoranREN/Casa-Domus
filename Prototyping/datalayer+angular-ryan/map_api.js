@@ -36,7 +36,7 @@ function initializeMap(divName, userResults = null) {
   map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"}, function(){
     addInfoWindows(map);
     if(userResults){
-      setGradientColors(map,results);
+      setGradientColors(map,userResults);
       applyGradient(map);
     }
   });
@@ -59,12 +59,12 @@ function colorLerp(t){
 //Collects each feature (county) and sets a property in it called gradient
 //Sets the gradient by the position in the array
 function setGradientColors(map,results){
-	var size_of_array = 3220;
-	for (var i=0; i < results.length; i++){
+	var sizeOfArray = results.length;
+	for (var i=0; i < sizeOfArray; i++){
 		//TODO make sure this is right
 		var feature = map.data.getFeatureById(results[i]["geoID"]);
 		if(feature){
-			feature.setProperty("gradient",1-(i/size_of_array));
+			feature.setProperty("gradient",1-(i/sizeOfArray));
 		}
 	}
 }
@@ -74,15 +74,16 @@ function getColorOfFeature(feature){
 	var gradient = feature.getProperty("gradient");
 	if(gradient){
 	  var col = colorLerp(gradient);
-	  return "hsl(" + col + ",100%,50%)";
+	  return "hsl(" + col + ",100%,50%)"; //gradient with 100% saturation
 	} else {
-	  return "hsl(0,0%,0%)";
+	  return "hsl(0,0%,0%)"; //black
 	}
 }
 
 
 //Applys the gradients of each county to the map
 function applyGradient(map){
+	//sets style of entire map
 	map.data.setStyle(function(feature){
 	  var col = getColorOfFeature(feature);
 	  return { fillColor: col,  strokeWeight: 1, fillOpacity: 1};
