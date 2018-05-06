@@ -56,7 +56,6 @@ function parseCountyData() {
             dynamicTyping: true,
             complete: function (results) {
                 climateJSON = JSON.parse(JSON.stringify(results.data));
-                console.log(climateJSON);
             }
         });
 
@@ -68,8 +67,6 @@ function parseCountyData() {
             countyName: propertyJSON[key].geo_name.slice(0, -4)
         });
     }
-    console.log("county list");
-    console.log(countyList);
 
 }
 
@@ -137,9 +134,9 @@ function searchCounty(countyToSearch, stateToSearch) {
         }
     }
 
-    // match the name found in the climateJSON with the information in propertyJSON
+    // match the geo id found in the climateJSON with the information in climateJSON
     for (var key = 0; key < climateJSON.length; key++) {
-        if (countyToSearch === (climateJSON[key].county + ' County') && stateToSearch === climateJSON[key].state) {
+        if (geoID === (climateJSON[key].GEO_ID)) {
             jan = climateJSON[key].Jan;
             july = climateJSON[key].July;
         }
