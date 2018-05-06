@@ -5,7 +5,7 @@
 
 <body id="grad">
   <div style="font-family: 'Quicksand', sans-serif;" letter-spacing: 4px>
-    <font size="7" color="white">
+    <font size="7" color="black">
   <h2>Welcome to Casa Domus</h2>
 </font>
 </div>
@@ -26,25 +26,32 @@
 <table id="table" align="left" cellpadding="15"  style="margin: 0px auto;" >
 
 <tr></tr>
+
 <tr>
-<td>What is your current median household income?</td>
-<td>
-  <input type="range" min="20000" max="200000" value="110000" class="slider" ng-model="userIncome">{{userIncome | currency}}
-</td>
+    <td>
+        What is your current median household income?
+    </td>
+    <td style="width: 350px"> <b>
+        <input type="range" min="20000" max="200000" value="110000" class="slider" ng-model="userIncome">{{userIncome | currency}}
+   </b>  </td>
 </tr>
 
 <tr>
-<td>How much property value can you afford?</td>
-<td>
-  <input type="range" min="19800" max="1000000" value="509900" class="slider" ng-model="userProperty">{{userProperty | currency}}
-</td>
+    <td>
+        How much property value can you afford?
+    </td>
+    <td style="width: 350px"> <b>
+        <input type="range" min="19800" max="1000000" value="509900" class="slider" ng-model="userProperty">{{userProperty | currency}}
+    </b> </td>
 </tr>
 
 <tr>
-<td>How far do you want you dollar to go? (Cost of living index)</td>
-<td>
-  <input type="range" min="88" max="188" value="136.5" class="slider" ng-model="userLiving">{{userLiving}}
-</td>
+    <td>
+        How far do you want you dollar to go? (Cost of Living Index)
+    </td>
+    <td>
+        <input type="range" min="88" max="188" value="136.5" class="slider" ng-model="userLiving">{{userLiving}}
+    </td>
 </tr>
 
 <tr>
