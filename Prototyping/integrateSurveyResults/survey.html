@@ -24,8 +24,8 @@
 	<center>
 		<div style="font-family: 'Quicksand', sans-serif;" letter-spacing: 4px>
 			<br>
-			<font size="7" color="white">
-				Let's find a neighborhood just for you!
+			<font size="7" color="black">
+				<b>Let's find a neighborhood just for you!</b>
 				<br>
 				<font size="6">
 					We'll start with a few basic questions.
@@ -40,7 +40,7 @@
 					<table id="table" align="center" cellpadding="15" style="margin: 0px auto;">
 						<tr>
 							<td>What is your current median household income?</td>
-							<td>
+							<td style="width: 350px">
 								<input type="range" min="20000" max="200000" value="110000" class="slider" ng-model="userIncome">{{userIncome | currency}}
 							</td>
 						</tr>
@@ -48,15 +48,13 @@
 
 						<tr>
 							<td>How much property value can you afford?</td>
-							<td>
+							<td style="width: 350px">
 								<input type="range" min="19800" max="1000000" value="509900" class="slider" ng-model="userProperty">{{userProperty | currency}}
 							</td>
 						</tr>
-						<tr></tr>
-
 						<tr>
 							<td>How far do you want you dollar to go? (Cost of living index)</td>
-							<td>
+							<td style="width: 350px">
 								<input type="range" min="88" max="188" value="136.5" class="slider" ng-model="userLiving">{{userLiving}}
 							</td>
 						</tr>
@@ -64,7 +62,7 @@
 
 						<tr>
 							<td>How much can you afford to spend on rent per month?</td>
-							<td>
+							<td style="width: 350px">
 								<input type="range" min="400" max="3000" value="1700" class="slider" ng-model="userRent">{{userRent | currency}}
 							</td>
 						</tr>
