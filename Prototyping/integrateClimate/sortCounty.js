@@ -41,14 +41,26 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
             (county.rent1bed) &&
             (county.jan) &&
             (county.july)){
-            var dist = Math.hypot((county.medianProperty - userProperty),
-                (county.costOfLiving - userLiving),
-                (county.medianHHIncome - userIncome),
-                (county.rent1bed - userRent),
-                (county.jan - userJan),
-                (county.july - userJuly)
+                
+            // Euclidean distance
+            // var dist = Math.hypot((county.medianProperty - userProperty),
+            //     (county.costOfLiving - userLiving),
+            //     (county.medianHHIncome - userIncome),
+            //     (county.rent1bed - userRent),
+            //     (county.jan - userJan),
+            //     (county.july - userJuly));
+
+            // Manhattan Distance
+            var dist = (
+                Math.abs(county.medianProperty - userProperty) +
+                Math.abs(county.costOfLiving - userLiving) +
+                Math.abs(county.medianHHIncome - userIncome) +
+                Math.abs(county.rent1bed - userRent) +
+                Math.abs(county.jan - userJan) +
+                Math.abs(county.july - userJuly)
             );
         }
+
         // insert county with distance if it has a distance (mostly all counties do)
         if (!Number.isNaN(dist) && dist != 0) {
             userResults.push({
