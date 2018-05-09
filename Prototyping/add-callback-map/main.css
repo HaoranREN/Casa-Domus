@@ -1,25 +1,3 @@
-#grad {
-    min-height: 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background: #b4f5ea;
-    background-repeat:no-repeat;
-    background: -webkit-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -moz-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -ms-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -o-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: linear-gradient( to left top, #066e89, #a1f2cf);
-}
-
-
-#table
-{ 
- font-size: 22;
- color: #ffeffe;
-}
-
 .slidecontainer {
     width: 100%; /* Width of the outside container */
 }
@@ -28,8 +6,8 @@
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
-    width: 50%; /* Full-width */
-    height: 15px; /* Specified height */
+    width: 100%; /* Full-width */
+    height: 25px; /* Specified height */
     background: #d3d3d3; /* Grey background */
     outline: none; /* Remove outline */
     opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
@@ -42,13 +20,13 @@
     opacity: 1; /* Fully shown on mouse-over */
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: 25px; /* Set a specific slider handle width */
     height: 25px; /* Slider handle height */
-    background: #fffd00; /* Green background */
+    background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
 

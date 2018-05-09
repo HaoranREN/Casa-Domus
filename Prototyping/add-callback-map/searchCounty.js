@@ -1,9 +1,8 @@
 // Globally defined, contains the csv data in JSON (see console log)
-var incomeJSON;
+var incomeJSON ;
 var propertyJSON;
 var livingJSON;
 var rentJSON;
-var climateJSON;
 
 // Array with county list
 var countyList = [];
@@ -16,6 +15,7 @@ function parseCountyData() {
             dynmicTyping: true,
             complete: function (results) {
                 incomeJSON = JSON.parse(JSON.stringify(results.data));
+                console.log(incomeJSON);
             }
         });
 
@@ -26,6 +26,7 @@ function parseCountyData() {
             dynamicTyping: true,
             complete: function (results) {
                 propertyJSON = JSON.parse(JSON.stringify(results.data));
+                console.log(propertyJSON);
             }
         });
 
@@ -36,6 +37,7 @@ function parseCountyData() {
             dynamicTyping: true,
             complete: function (results) {
                 livingJSON = JSON.parse(JSON.stringify(results.data));
+                console.log(livingJSON);
             }
         });
 
@@ -46,27 +48,20 @@ function parseCountyData() {
             dynamicTyping: true,
             complete: function (results) {
                 rentJSON = JSON.parse(JSON.stringify(results.data));
-            }
-        });
-
-    // Papa Parse 50th percentile Rent Values
-    Papa.parse(climateData,
-        {
-            header: true,
-            dynamicTyping: true,
-            complete: function (results) {
-                climateJSON = JSON.parse(JSON.stringify(results.data));
+                console.log(rentJSON);
             }
         });
 
     // Push all county names into one list
     for (var key = 0; key < propertyJSON.length; key++) {
         countyList.push({
-            state: propertyJSON[key].geo_name.substr(-2),
+            state: propertyJSON[key].geo_name.substr(-2), 
             areaName: propertyJSON[key].geo_name,
             countyName: propertyJSON[key].geo_name.slice(0, -4)
-        });
+         });
     }
+
+    console.log(countyList);
 
 }
 
@@ -86,12 +81,6 @@ function searchCounty(countyToSearch, stateToSearch) {
     var rent4bed = null;
     var costOfLiving = null;
     var costOfGroceries = null;
-    var fips2010 = null;
-    var hu2010 = null;
-    var population = null;
-    var geoID = null;
-    var jan = null;
-    var july = null;
 
     // Find area name in rentJSON
     for (var key = 0; key < rentJSON.length; key++) {
@@ -134,14 +123,6 @@ function searchCounty(countyToSearch, stateToSearch) {
         }
     }
 
-    // match the geo id found in the climateJSON with the information in climateJSON
-    for (var key = 0; key < climateJSON.length; key++) {
-        if (geoID === (climateJSON[key].GEO_ID)) {
-            jan = climateJSON[key].Jan;
-            july = climateJSON[key].July;
-        }
-    }
-
     resultsJSON = {
         state: state,
         countyName: countyName,
@@ -156,9 +137,7 @@ function searchCounty(countyToSearch, stateToSearch) {
         hu2010: hu2010,
         geoID: geoID,
         fips2010: fips2010,
-        fipsTxt: fipsTxt,
-        jan: jan,
-        july: july
+        fipsTxt: fipsTxt
     };
 
     return resultsJSON;
