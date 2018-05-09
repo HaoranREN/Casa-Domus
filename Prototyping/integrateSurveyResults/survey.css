@@ -4,13 +4,13 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background: #b4f5ea;
+    background: #ccffbc;
     background-repeat:no-repeat;
-    background: -webkit-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -moz-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -ms-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -o-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: linear-gradient( to left top, #066e89, #a1f2cf);
+    background: -webkit-linear-gradient( to left top, #779bff, #ccffbc);
+    background: -moz-linear-gradient( to left top, #779bff, #ccffbc);
+    background: -ms-linear-gradient( to left top, #779bff, #a1f2cf);
+    background: -o-linear-gradient( to left top, #779bff, #a1f2cf);
+    background: linear-gradient( to left top, #779bff, #a1f2cf);
 }
 
 
@@ -22,6 +22,7 @@
 
 .slidecontainer {
     width: 100%; /* Width of the outside container */
+    padding-right: 100px;
 }
 
 /* The slider itself */
@@ -57,4 +58,10 @@
     height: 25px; /* Slider handle height */
     background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
+}
+
+td {
+    font-family: "Quicksand";
+    font-size: x-large;
+    color: black;
 }

@@ -64,8 +64,114 @@
 
     </table>
 
-    <!- Crudely print the top 10 closest counties ->
-    {{resultString}}
+    <!- Top 5 counties in a table  with data alongside->
+    <table>
+      <tr>
+        <td>
+          <h3>Here are some suggestions:</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          {{resultList[0].areaName}}:
+        </td>
+
+        <td>
+          Median Income: {{resultList[0].medianHHIncome}}
+        </td>
+        <td>
+          Median Property Value: {{resultList[0].medianProperty}}
+        </td>
+        <td>
+          Cost of Living Index for {{resultList[0].state}}: {{resultList[0].costOfLiving}}
+        </td>
+        <td>
+          Median Monthly Rent for a 1 Bed Unit: {{resultList[0].rent1Bed}}
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          {{resultList[1].areaName}}:
+        </td>
+
+        <td>
+          Median Income: {{resultList[1].medianHHIncome}}
+        </td>
+        <td>
+          Median Property Value: {{resultList[1].medianProperty}}
+        </td>
+        <td>
+          Cost of Living Index for {{resultList[1].state}}: {{resultList[1].costOfLiving}}
+        </td>
+        <td>
+          Median Monthly Rent for a 1 Bed Unit: {{resultList[1].rent1Bed}}
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          {{resultList[2].areaName}}:
+        </td>
+
+        <td>
+          Median Income: {{resultList[2].medianHHIncome}}
+        </td>
+        <td>
+          Median Property Value: {{resultList[2].medianProperty}}
+        </td>
+        <td>
+          Cost of Living Index for {{resultList[2].state}}: {{resultList[2].costOfLiving}}
+        </td>
+        <td>
+          Median Monthly Rent for a 1 Bed Unit: {{resultList[2].rent1Bed}}
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          {{resultList[3].areaName}}:
+        </td>
+
+        <td>
+          Median Income: {{resultList[3].medianHHIncome}}
+        </td>
+        <td>
+          Median Property Value: {{resultList[3].medianProperty}}
+        </td>
+        <td>
+          Cost of Living Index for {{resultList[3].state}}: {{resultList[3].costOfLiving}}
+        </td>
+        <td>
+          Median Monthly Rent for a 1 Bed Unit: {{resultList[3].rent1Bed}}
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>
+          {{resultList[4].areaName}}:
+        </td>
+
+        <td>
+          Median Income: {{resultList[4].medianHHIncome}}
+        </td>
+        <td>
+          Median Property Value: {{resultList[4].medianProperty}}
+        </td>
+        <td>
+          Cost of Living Index for {{resultList[4].state}}: {{resultList[4].costOfLiving}}
+        </td>
+        <td>
+          Median Monthly Rent for a 1 Bed Unit: {{resultList[4].rent1Bed}}
+        </td>
+      </tr>
+
+    </table>
+
   </div>
 
 
@@ -77,10 +183,7 @@
   <script>
     //ACTUAL CODE STARTS EXECUTING HERE
 
-    // var map = initializeMap("mapDiv");
-    // var userResults = [];
-
-    // Extract data from url
+    // Function: Extracts data parameters from url
     // from https://stackoverflow.com/questions/814613/how-to-read-get-data-from-a-url-using-javascript
     function parseURLParams(url) {
       var queryStart = url.indexOf("?") + 1,
@@ -112,7 +215,7 @@
 
     mainApp.controller('surveyController', function ($scope) {
       // String with Output
-      $scope.resultString = "";
+      $scope.resultList = "";
 
       $scope.map = initializeMap("mapDiv");
       $scope.userResults = [];
@@ -133,36 +236,37 @@
         console.log($scope.userResults);
         setGradientColors($scope.map, $scope.userResults);
         applyGradient($scope.map);
-        this.printResults();
+        this.getTopTen();
       }
 
       // the most barbaric way to print the results
-      $scope.printResults = function () {
-        $scope.resultString = "";
-        $scope.resultString += "Here are some Suggestions: ";
-        $scope.resultString += $scope.userResults[0].areaName + "; ";
-        $scope.resultString += $scope.userResults[1].areaName + "; ";
-        $scope.resultString += $scope.userResults[2].areaName + "; ";
-        $scope.resultString += $scope.userResults[3].areaName + "; ";
-        $scope.resultString += $scope.userResults[4].areaName + "; ";
-        $scope.resultString += $scope.userResults[5].areaName + "; ";
-        $scope.resultString += $scope.userResults[6].areaName + "; ";
-        $scope.resultString += $scope.userResults[7].areaName + "; ";
-        $scope.resultString += $scope.userResults[8].areaName + "; ";
-        $scope.resultString += $scope.userResults[9].areaName;
+      $scope.getTopTen = function () {
+        $scope.resultList = [];
+        $scope.resultList.push($scope.userResults[0]);
+        $scope.resultList.push($scope.userResults[1]);
+        $scope.resultList.push($scope.userResults[2]);
+        $scope.resultList.push($scope.userResults[3]);
+        $scope.resultList.push($scope.userResults[4]);
+        // $scope.resultList.push($scope.userResults[5].areaName);
+        // $scope.resultList.push($scope.userResults[6].areaName);
+        // $scope.resultList.push($scope.userResults[7].areaName);
+        // $scope.resultList.push($scope.userResults[8].areaName);
+        // $scope.resultList.push($scope.userResults[9].areaName);
+
+        console.log($scope.resultList);
       }
 
       $scope.openMap = function () {
-				// go to maps page, bring the results of the questionnaire
-				map_url = "http://127.0.0.1/~MarbleCake/map.html?income="
-					+ String($scope.userIncome) + "&property="
-					+ String($scope.userProperty) + "&living="
-					+ String($scope.userLiving) + "&rent="
-					+ String($scope.userRent);
+        // go to maps page, bring the results of the questionnaire
+        map_url = "http://127.0.0.1/~MarbleCake/map.html?income="
+          + String($scope.userIncome) + "&property="
+          + String($scope.userProperty) + "&living="
+          + String($scope.userLiving) + "&rent="
+          + String($scope.userRent);
 
         history.replaceState('data to be passed', 'Title of the page', map_url);
         this.execute();
-			};
+      };
 
       // runs as soon as the page loads
       $scope.execute();
