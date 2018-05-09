@@ -44,7 +44,7 @@ function addInfoWindows(map,userResults=null){
   });
 }
 
-function initializeMap(divName, userResults = null) {
+function initializeMap(divName) {
 
   //get the html and set style where the map will be
   var mapDiv = document.getElementById(divName);
@@ -58,7 +58,11 @@ function initializeMap(divName, userResults = null) {
     disableDefaultUI: true,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
+  
+  return map;
+}
 
+function addShapesAndUI(map,userResults){
   //load shape data into map and identify each feature (county) of the map by their AFFGEOID
   map.data.loadGeoJson('county_shapes_lower_48.json',{idPropertyName: "AFFGEOID"}, function(){
     if(userResults){
@@ -70,10 +74,7 @@ function initializeMap(divName, userResults = null) {
       addInfoWindows(map);
     }
   });
-  
-  return map;
 }
-
 
 //Simple linear interpolation of hue value of hsv
 //t = 1 -> endColor
