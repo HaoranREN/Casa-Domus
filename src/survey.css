@@ -15,9 +15,14 @@
 
 
 #table
-{ 
+{
  font-size: 22;
- color: #ffeffe;
+ color: #000;
+}
+
+td {
+  width: 50%;
+  align: center;
 }
 
 .slidecontainer {
