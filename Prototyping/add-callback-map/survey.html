@@ -1,0 +1,116 @@
+<!-- Casa Domus landing page with the inital user survey
+	Contributors: William Gao, James Williams
+-->
+<html>
+<header>
+
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<title> Casa Domus </title>
+	<link rel="stylesheet" href="survey.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+	 crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<script src="https://maps.google.com/maps/api/js?v=3&key=AIzaSyB0vnW0Sd48sd0msALTLt3vGWIMwnwLBG4" type="text/javascript"></script>
+
+
+</header>
+
+<body id=grad>
+	<br>
+	<br>
+
+	<center>
+		<div style="font-family: 'Quicksand', sans-serif;" letter-spacing: 4px>
+			<br>
+			<font size="7" color="white">
+				Let's find a neighborhood just for you!
+				<br>
+				<font size="6">
+					We'll start with a few basic questions.
+				</font>
+				<br>
+				<br>
+
+				<!- Angularjs View ->
+				<div style="float: center" ng-app="mainApp" ng-controller="surveyController">
+
+					<!- Input ->
+					<table id="table" align="center" cellpadding="15" style="margin: 0px auto;">
+						<tr>
+							<td>What is your current median household income?</td>
+							<td>
+								<input type="range" min="20000" max="200000" value="110000" class="slider" ng-model="userIncome">{{userIncome | currency}}
+							</td>
+						</tr>
+						<tr></tr>
+
+						<tr>
+							<td>How much property value can you afford?</td>
+							<td>
+								<input type="range" min="19800" max="1000000" value="509900" class="slider" ng-model="userProperty">{{userProperty | currency}}
+							</td>
+						</tr>
+						<tr></tr>
+
+						<tr>
+							<td>How far do you want you dollar to go? (Cost of living index)</td>
+							<td>
+								<input type="range" min="88" max="188" value="136.5" class="slider" ng-model="userLiving">{{userLiving}}
+							</td>
+						</tr>
+						<tr></tr>
+
+						<tr>
+							<td>How much can you afford to spend on rent per month?</td>
+							<td>
+								<input type="range" min="400" max="3000" value="1700" class="slider" ng-model="userRent">{{userRent | currency}}
+							</td>
+						</tr>
+						<tr></tr>
+					</table>
+					<br>
+					<font size="7" color="white">
+						<button ng-click="openMap()" class="btn btn-primary btn-lg">Find Your Match!</button>
+					</font>
+	</center>
+
+	<script>
+		var userResults = [];
+
+		// Angularjs Controller
+		var mainApp = angular.module("mainApp", []);
+
+		mainApp.controller('surveyController', function ($scope) {
+
+			// User values (default values)
+			$scope.userIncome = 110000;
+			$scope.userProperty = 509900;
+			$scope.userLiving = 136.5;
+			$scope.userRent = 1700;
+
+			$scope.openMap = function () {
+				// go to maps page, bring the results of the questionnaire
+				map_url = "map.html?income="
+					+ String($scope.userIncome) + "&property="
+					+ String($scope.userProperty) + "&living="
+					+ String($scope.userLiving) + "&rent="
+					+ String($scope.userRent);
+
+				window.location.href = map_url;
+			};
+		});
+	</script>
+</body>
+
+</font>
+<br>
+<br>
+<br>
+
+</div>
+</center>
+</body>
+
+</html>
