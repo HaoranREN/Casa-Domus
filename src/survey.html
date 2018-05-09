@@ -39,7 +39,7 @@
 					<!- Input ->
 					<table id="table" align="center" cellpadding="15" style="margin: 0px auto;">
 						<tr>
-							<td>What is your current median household income?</td>
+							<td align="center">What is your current median household income?</td>
 							<td>
 								<input type="range" min="20000" max="200000" value="110000" class="slider" ng-model="userIncome">{{userIncome | currency}}
 							</td>
@@ -47,7 +47,7 @@
 						<tr></tr>
 
 						<tr>
-							<td>How much property value can you afford?</td>
+							<td align="center">How much property value can you afford?</td>
 							<td>
 								<input type="range" min="19800" max="1000000" value="509900" class="slider" ng-model="userProperty">{{userProperty | currency}}
 							</td>
@@ -55,7 +55,7 @@
 						<tr></tr>
 
 						<tr>
-							<td>Cost of Living Index: How far do you want your dollar to go? (The average in America is 100)</td>
+							<td align="center">Cost of Living Index: How far do you want your dollar to go? (The average in America is 100)</td>
 							<td>
 								<input type="range" min="88" max="188" value="136.5" class="slider" ng-model="userLiving">{{userLiving}}
 							</td>
@@ -63,21 +63,21 @@
 						<tr></tr>
 
 						<tr>
-							<td>How much can you afford to spend on rent per month?</td>
+							<td align="center">How much can you afford to spend on rent per month?</td>
 							<td>
 								<input type="range" min="400" max="3000" value="1700" class="slider" ng-model="userRent">{{userRent | currency}}
 							</td>
 						</tr>
 
 						<tr>
-							<td>How hot do you want it to be in the summer?</td>
+							<td align="center">How hot do you want it to be in the summer?</td>
 							<td>
 								<input type="range" min="0" max="100" value="1700" class="slider" ng-model="userJuly">{{userJuly}}&deg
 							</td>
 						</tr>
 
 						<tr>
-							<td>How cold do you want it be in the winter?</td>
+							<td align="center">How cold do you want it be in the winter?</td>
 							<td>
 								<input type="range" min="0" max="100" value="1700" class="slider" ng-model="userJan">{{userJan}}&deg
 							</td>

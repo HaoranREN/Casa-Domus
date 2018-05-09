@@ -28,13 +28,21 @@
 #table
 {
  font-size: 22;
+ width: 75%;
  color: #000;
+}
+
+#tablenew
+{
+  font-size: 22;
+  width: 100%;
+  color: #000;
 }
 
 td {
   width: 50%;
   align: center;
-  font-family: Quicksand
+  font-family: Quicksand;
 }
 
 .slidecontainer {

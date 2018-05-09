@@ -23,7 +23,7 @@
       <td style='width:35%; height:100%'>
 
         <!- Input Section->
-        <table id="table" align="left" cellpadding="5" style="margin: 0px auto;">
+        <table id="tablenew" align="left" cellpadding="5" style="margin: 0px auto;">
 
           <tr></tr>
           <tr>
@@ -251,15 +251,15 @@
         $scope.userResults = calculateDistance($scope.userIncome, $scope.userProperty,
                                                $scope.userLiving, $scope.userRent,
                                                 $scope.userJan, $scope.userJuly);
-	if($scope.shapesSet){
+	    if($scope.shapesSet){
           setGradientColors($scope.map, $scope.userResults);
           applyGradient($scope.map);
-	}
-	else {
-	  addShapesAndUI($scope.map,$scope.userResults);
-	  $scope.shapesSet = true;
-	}
-        this.getTopTen();
+	    }
+	    else {
+	        addShapesAndUI($scope.map,$scope.userResults);
+	        $scope.shapesSet = true;
+	    }
+      this.getTopTen();
       }
 
       // the most barbaric way to print the results
