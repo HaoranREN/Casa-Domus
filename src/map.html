@@ -232,7 +232,7 @@
       // String with Output
       $scope.resultList = "";
 
-      //$scope.map = initializeMap("mapDiv");
+      $scope.shapesSet = false;
       $scope.userResults = [];
 
       // get results from survey in the url
@@ -251,12 +251,13 @@
         $scope.userResults = calculateDistance($scope.userIncome, $scope.userProperty, 
                                                $scope.userLiving, $scope.userRent,
                                                 $scope.userJan, $scope.userJuly);
-	if($scope.map){
+	if($scope.shapesSet){
           setGradientColors($scope.map, $scope.userResults);
           applyGradient($scope.map);
 	} 
 	else {
-	  $scope.map = initializeMap("mapDiv",$scope.userResults);
+	  addShapesAndUI($scope.map,$scope.userResults);
+	  $scope.shapesSet = true;
 	}
         this.getTopTen();
       }
@@ -289,11 +290,9 @@
       };
 
       // runs as soon as the page loads
+      
+      $scope.map = initializeMap("mapDiv");
       $scope.execute();
-      /*setTimeout(function () {
-        setGradientColors($scope.map, $scope.userResults);
-        applyGradient($scope.map);
-      }, 1000)*/
     });
 
   </script>
