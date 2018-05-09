@@ -22,7 +22,7 @@
 //      userResults[0].areaName; -> County and state name of the closest matched county
 //      userResults[3].medianProperty; -> Median property value of the 4th closest matched county
 
-var calculateDistance = function (userIncome, userProperty, userLiving, userRent, userJan, userJuly) {
+var calculateDistance = function (userIncome, userProperty, userLiving, userRent) {
     // contains candidate county to compare against
     var county = null;
     var userResults = [];
@@ -38,29 +38,13 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
         if ((county.medianProperty) &&
             (county.costOfLiving) &&
             (county.medianHHIncome) &&
-            (county.rent1bed) &&
-            (county.jan) &&
-            (county.july)){
-                
-            // Euclidean distance
-            // var dist = Math.hypot((county.medianProperty - userProperty),
-            //     (county.costOfLiving - userLiving),
-            //     (county.medianHHIncome - userIncome),
-            //     (county.rent1bed - userRent),
-            //     (county.jan - userJan),
-            //     (county.july - userJuly));
-
-            // Manhattan Distance
-            var dist = (
-                Math.abs(county.medianProperty - userProperty) +
-                Math.abs(county.costOfLiving - userLiving) +
-                Math.abs(county.medianHHIncome - userIncome) +
-                Math.abs(county.rent1bed - userRent) +
-                Math.abs(county.jan - userJan) +
-                Math.abs(county.july - userJuly)
+            (county.rent1bed)) {
+            var dist = Math.hypot((county.medianProperty - userProperty),
+                (county.costOfLiving - userLiving),
+                (county.medianHHIncome - userIncome),
+                (county.rent1bed - userRent)
             );
         }
-
         // insert county with distance if it has a distance (mostly all counties do)
         if (!Number.isNaN(dist) && dist != 0) {
             userResults.push({
@@ -78,9 +62,7 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
                 hu2010: county.hu2010,
                 geoID: county.geoID,
                 fips2010: county.fips2010,
-                fipsTxt: county.fipsTxt,
-                jan: county.jan,
-                july: county.july
+                fipsTxt: county.fipsTxt
             });
         }
     }

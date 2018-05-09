@@ -58,3 +58,9 @@
     background: #4CAF50; /* Green background */
     cursor: pointer; /* Cursor on hover */
 }
+
+td {
+    font-family: "Quicksand";
+    font-size: x-large;
+    color: black;
+}
