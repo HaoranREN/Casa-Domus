@@ -6,12 +6,23 @@
     background-size: cover;
     background: #b4f5ea;
     background-repeat:no-repeat;
-    background: -webkit-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -moz-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -ms-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: -o-linear-gradient( to left top, #066e89, #a1f2cf);
-    background: linear-gradient( to left top, #066e89, #a1f2cf);
+    background: -webkit-linear-gradient( to left top, #80b4da, #3979a6);
+    background: -moz-linear-gradient( to left top, #80b4da, #3979a6);
+    background: -ms-linear-gradient( to left top, #80b4da, #3979a6);
+    background: -o-linear-gradient( to left top, #80b4da, #3979a6);
+    background: linear-gradient( to left top, #80b4da, #3979a6);
 }
+
+/*
+  Original colors
+  #066e89
+  #a1f2cf
+
+  New colors
+  #3979a6 (dark)
+  #80b4da (light)
+*/
+
 
 
 #table
@@ -23,6 +34,7 @@
 td {
   width: 50%;
   align: center;
+  font-family: Quicksand
 }
 
 .slidecontainer {

@@ -16,12 +16,12 @@
 <body id="grad">
   <!- Angularjs View ->
   <div style="height:100%" ng-app="mainApp" ng-controller="surveyController">
-  
+
     <table style='width:100%; height:100%'>
 
       <!- Input and Suggestions Section->
       <td style='width:35%; height:100%'>
-      
+
         <!- Input Section->
         <table id="table" align="left" cellpadding="5" style="margin: 0px auto;">
 
@@ -43,7 +43,7 @@
           </tr>
 
           <tr>
-            <td>How far do you want you dollar to go? (Cost of living index)</td>
+            <td>Cost of Living Index: How far do you want your dollar to go? (The average in America is 100)</td>
             <td>
               <input type="range" min="88" max="188" value="136.5" class="slider" ng-model="userLiving">
               {{userLiving}}
@@ -248,13 +248,13 @@
 
       $scope.execute = function () {
         // call get results HERE
-        $scope.userResults = calculateDistance($scope.userIncome, $scope.userProperty, 
+        $scope.userResults = calculateDistance($scope.userIncome, $scope.userProperty,
                                                $scope.userLiving, $scope.userRent,
                                                 $scope.userJan, $scope.userJuly);
 	if($scope.shapesSet){
           setGradientColors($scope.map, $scope.userResults);
           applyGradient($scope.map);
-	} 
+	}
 	else {
 	  addShapesAndUI($scope.map,$scope.userResults);
 	  $scope.shapesSet = true;
@@ -290,7 +290,7 @@
       };
 
       // runs as soon as the page loads
-      
+
       $scope.map = initializeMap("mapDiv");
       $scope.execute();
     });
