@@ -90,7 +90,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr ng-click="focus(userResults[0])">
             <td>
               {{resultList[0].areaName}}:
             </td>
@@ -109,7 +109,7 @@
           </tr>
 
 
-          <tr>
+          <tr ng-click="focus(userResults[1])">
             <td>
               {{resultList[1].areaName}}:
             </td>
@@ -128,7 +128,7 @@
           </tr>
 
 
-          <tr>
+          <tr ng-click="focus(userResults[2])">
             <td>
               {{resultList[2].areaName}}:
             </td>
@@ -146,7 +146,7 @@
             </td>
           </tr>
 
-          <tr>
+          <tr ng-click="focus(userResults[3])">
             <td>
               {{resultList[3].areaName}}:
             </td>
@@ -165,7 +165,7 @@
           </tr>
 
 
-          <tr>
+          <tr ng-click="focus(userResults[4])">
             <td>
               {{resultList[4].areaName}}:
             </td>
@@ -258,6 +258,10 @@
 	        $scope.shapesSet = true;
 	    }
       this.getTopTen();
+      }
+
+      $scope.focus = function (county) {
+         focusOnCoords($scope.map,county); 
       }
 
       // the most barbaric way to print the results
