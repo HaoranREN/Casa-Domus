@@ -12,7 +12,6 @@ function parseCountyData() {
             dynmicTyping: true,
             complete: function (results) {
                 everythingJSON = JSON.parse(JSON.stringify(results.data));
-                console.log(everythingJSON)
             }
         });
 
@@ -26,7 +25,6 @@ function parseCountyData() {
             geoID: everythingJSON[key].geoID
         });
     }
-    console.log(countyList)
 
 }
 

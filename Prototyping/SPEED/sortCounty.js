@@ -88,7 +88,5 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
     // Sort counties by distance
     userResults.sort(sortByProperty('distance'));
 
-    console.log(userResults)
-
     return userResults;
 }
