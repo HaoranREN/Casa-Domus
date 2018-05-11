@@ -27,13 +27,13 @@ function addInfoWindows(map,userResults=null){
       infoWindow.setContent("<h2>"+countyName+"</h2>");
     }
     else{
-      infoWindow.setContent("<h2>" +countyName + "</h2><table border='1'>" +
+      infoWindow.setContent("<h2>" + featureData['areaName'] + "</h2><table border='1'>" +
 	                      "<tr><td>Median Income</td><td>$" + parseFloat(featureData['medianHHIncome']).toFixed(2) + "</td></tr>" + 
                               "<tr><td>Median Property Value</td><td>$" + parseFloat(featureData['medianProperty']).toFixed(2) + "</td></tr>" +
                               "<tr><td>Cost of Living</td><td>" + featureData['costOfLiving'] + "</td></tr>" +
 	                      "<tr><td>Rent Cost</td><td>$" + parseFloat(featureData['rent1Bed']).toFixed(2) + "</td></tr>" +
-	                      "<tr><td>Winter Temperature</td><td>" + featureData['jan'] + "&deg;</td></tr>" +
 	                      "<tr><td>Summer Temperature</td><td>" + featureData['july'] + "&deg;</td></tr>" + 
+	                      "<tr><td>Winter Temperature</td><td>" + featureData['jan'] + "&deg;</td></tr>" +
 	                    "</table>");
     }
 
