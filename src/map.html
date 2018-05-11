@@ -272,11 +272,13 @@
 
       $scope.openMap = function () {
         // go to maps page, bring the results of the questionnaire
-        map_url = "map.html?income="
-          + String($scope.userIncome) + "&property="
-          + String($scope.userProperty) + "&living="
-          + String($scope.userLiving) + "&rent="
-          + String($scope.userRent);
+				map_url = "map.html?income="
+					+ String($scope.userIncome) + "&property="
+					+ String($scope.userProperty) + "&living="
+					+ String($scope.userLiving) + "&rent="
+					+ String($scope.userRent) + "&jan="
+					+ String($scope.userJan) + "&july="
+					+ String($scope.userJuly);
 
         history.replaceState('data to be passed', 'Title of the page', map_url);
         this.execute();
