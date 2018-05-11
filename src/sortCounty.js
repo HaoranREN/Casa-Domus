@@ -29,9 +29,8 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
 
     // Loop through all counties and calculate distances
     for (var key = 0; key < countyList.length; key++) {
-        countyToSearch = countyList[key].countyName;
-        stateToSearch = countyList[key].state;
-        var county = searchCounty(countyToSearch, stateToSearch);
+        countyToSearch = countyList[key].geoID;
+        var county = searchCounty(countyToSearch);
         var dist = 0;
 
         // Only calculate the distance of those counties that have these values
@@ -64,9 +63,9 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
         // insert county with distance if it has a distance (mostly all counties do)
         if (!Number.isNaN(dist) && dist != 0) {
             userResults.push({
-                state: countyList[key].state,
-                areaName: countyList[key].areaName,
-                countyName: countyList[key].countyName,
+                state: county.state,
+                areaName: county.areaName,
+                countyName: county.countyName,
                 distance: dist,
                 medianProperty: county.medianProperty,
                 costOfLiving: county.costOfLiving,
@@ -80,7 +79,9 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
                 fips2010: county.fips2010,
                 fipsTxt: county.fipsTxt,
                 jan: county.jan,
-                july: county.july
+                july: county.july,
+                lat: county.lat,
+                long: county.long
             });
         }
     }
