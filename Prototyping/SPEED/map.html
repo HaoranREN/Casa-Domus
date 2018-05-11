@@ -79,11 +79,6 @@
               <button ng-click="openMap()">Submit</button>
             </td>
           </tr>
-          <tr>
-            <td>
-              <button ng-click="export()">Export</button>
-            </td>
-          </tr>
         </table>
         <!- Input Section End->
 
@@ -263,11 +258,6 @@
 	        $scope.shapesSet = true;
 	    }
       this.getTopTen();
-      console.log($scope.userResults)
-      }
-
-      $scope.export = function () {
-        console.log(Papa.unparse($scope.userResults))
       }
 
       // the most barbaric way to print the results
