@@ -1,5 +1,20 @@
 var infoWindow = new google.maps.InfoWindow();
 
+function focusOnCoords(map,county){
+	var countyCoords = new google.maps.LatLng(county['lat'],county['long']);
+	map.setCenter(countyCoords);
+	infoWindow.setPosition(countyCoords);
+        infoWindow.setContent("<h2>" + county['areaName'] + "</h2><table border='1'>" +
+	                      "<tr><td>Median Income</td><td>$" + parseFloat(county['medianHHIncome']).toFixed(2) + "</td></tr>" + 
+                              "<tr><td>Median Property Value</td><td>$" + parseFloat(county['medianProperty']).toFixed(2) + "</td></tr>" +
+                              "<tr><td>Cost of Living</td><td>" + county['costOfLiving'] + "</td></tr>" +
+	                      "<tr><td>Rent Cost</td><td>$" + parseFloat(county['rent1Bed']).toFixed(2) + "</td></tr>" +
+	                      "<tr><td>Summer Temperature</td><td>" + county['july'] + "&deg;</td></tr>" + 
+	                      "<tr><td>Winter Temperature</td><td>" + county['jan'] + "&deg;</td></tr>" +
+	                    "</table>");
+	infoWindow.open(map);
+}
+
 function addInfoWindows(map,userResults=null){
   map.data.addListener('click',function(event){
     
