@@ -81,7 +81,7 @@
 						<tr>
 							<td align="center">What is your current median household income?</td>
 							<td>
-								<input type="range" min="20000" max="200000" value="110000" class="slider" ng-model="userIncome">{{userIncome | currency}}
+								<input type="range" min="22045" max="134609" value="78327" class="slider" ng-model="userIncome">{{userIncome | currency}}
 							</td>
 						</tr>
 
@@ -90,7 +90,7 @@
 						<tr>
 							<td align="center">How much property value can you afford?</td>
 							<td>
-								<input type="range" min="19800" max="1000000" value="509900" class="slider" ng-model="userProperty">{{userProperty | currency}}
+								<input type="range" min="33000" max="871500" value="452250" class="slider" ng-model="userProperty">{{userProperty | currency}}
 							</td>
 						</tr>
 						<tr></tr>
@@ -100,7 +100,7 @@
 						<tr>
 							<td align="center">Cost of Living Index: How far do you want your dollar to go? (The average in America is 100)</td>
 							<td>
-								<input type="range" min="88" max="188" value="136.5" class="slider" ng-model="userLiving">{{userLiving}}
+								<input type="range" min="85.1" max="155.7" value="120.4" class="slider" ng-model="userLiving">{{userLiving}}
 							</td>
 						</tr>
 						<tr></tr>
@@ -108,21 +108,21 @@
 						<tr>
 							<td align="center">How much can you afford to spend on rent per month?</td>
 							<td>
-								<input type="range" min="400" max="3000" value="1700" class="slider" ng-model="userRent">{{userRent | currency}}
+								<input type="range" min="456" max="2704" value="1580" class="slider" ng-model="userRent">{{userRent | currency}}
 							</td>
 						</tr>
 						
 						<tr>
 							<td align="center">How hot do you want it to be in the summer?</td>
 							<td>
-								<input type="range" min="0" max="100" value="1700" class="slider" ng-model="userJuly">{{userJuly}}&deg
+								<input type="range" min="60.3" max="88.7" value="74.5" class="slider" ng-model="userJuly">{{userJuly}}&deg
 							</td>
 						</tr>
 
 						<tr>
 							<td align="center">How cold do you want it be in the winter?</td>
 							<td>
-								<input type="range" min="0" max="100" value="1700" class="slider" ng-model="userJan">{{userJan}}&deg
+								<input type="range" min="5.7" max="66.2" value="35.95" class="slider" ng-model="userJan">{{userJan}}&deg
 							</td>
 						</tr>
 					
@@ -157,12 +157,12 @@
 		mainApp.controller('surveyController', function ($scope) {
 
 			// User values (default values)
-			$scope.userIncome = 110000;
-			$scope.userProperty = 509900;
-			$scope.userLiving = 136.5;
-			$scope.userRent = 1700;
-			$scope.userJan = 50;
-			$scope.userJuly = 50;
+			$scope.userIncome = 78327;
+			$scope.userProperty = 452250;
+			$scope.userLiving = 120.4;
+			$scope.userRent = 1580;
+			$scope.userJan = 35.95;
+			$scope.userJuly = 74.5;
 
 			$scope.openMap = function () {
 				// go to maps page, bring the results of the questionnaire

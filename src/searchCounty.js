@@ -19,9 +19,6 @@ function parseCountyData() {
     // Push all county names into one list
     for (var key = 0; key < everythingJSON.length; key++) {
         countyList.push({
-            state: everythingJSON[key].state,
-            areaName: everythingJSON[key].areaName,
-            countyName: everythingJSON[key].countyName,
             geoID: everythingJSON[key].geoID
         });
     }
@@ -52,6 +49,12 @@ function searchCounty(countyToSearch) {
     var july = null;
     var lat = null;
     var long = null;
+    var normProp = null;
+    var normLiving = null;
+    var normIncome = null;
+    var normRent = null;
+    var normJan = null;
+    var normJuly = null;
 
     // Find area name in rentJSON
     for (var key = 0; key < everythingJSON.length; key++) {
@@ -75,6 +78,13 @@ function searchCounty(countyToSearch) {
             july = everythingJSON[key].july;
             lat = everythingJSON[key].lat;
             long = everythingJSON[key].long;
+            normProp = everythingJSON[key].normProp;
+            normLiving = everythingJSON[key].normLiving;
+            normIncome = everythingJSON[key].normIncome;
+            normRent = everythingJSON[key].normRent;
+            normJan = everythingJSON[key].normJan;
+            normJuly = everythingJSON[key].normJuly;
+
             break;
         }
     }
@@ -97,7 +107,13 @@ function searchCounty(countyToSearch) {
         jan: jan,
         july: july,
         lat: lat,
-        long: long
+        long: long,
+        normProp: normProp,
+        normLiving: normLiving,
+        normIncome: normIncome,
+        normRent: normRent,
+        normJan: normJan,
+        normJuly: normJuly,
     };
 
     return resultsJSON;

@@ -39,8 +39,8 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
             (county.medianHHIncome) &&
             (county.rent1bed) &&
             (county.jan) &&
-            (county.july)){
-                
+            (county.july)) {
+
             // Euclidean distance
             // var dist = Math.hypot((county.medianProperty - userProperty),
             //     (county.costOfLiving - userLiving),
@@ -49,14 +49,24 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
             //     (county.jan - userJan),
             //     (county.july - userJuly));
 
-            // Manhattan Distance
+            // // Manhattan Distance
+            // var dist = (
+            //     Math.abs(county.medianProperty - userProperty) +
+            //     Math.abs(county.costOfLiving - userLiving) +
+            //     Math.abs(county.medianHHIncome - userIncome) +
+            //     Math.abs(county.rent1bed - userRent) +
+            //     Math.abs(county.jan - userJan) +
+            //     Math.abs(county.july - userJuly)
+            // );
+
+            // Normalized Manhattan Distance
             var dist = (
-                Math.abs(county.medianProperty - userProperty) +
-                Math.abs(county.costOfLiving - userLiving) +
-                Math.abs(county.medianHHIncome - userIncome) +
-                Math.abs(county.rent1bed - userRent) +
-                Math.abs(county.jan - userJan) +
-                Math.abs(county.july - userJuly)
+                Math.abs(county.normProp - ((userProperty - 33000) / (871500 - 33000))) +
+                Math.abs(county.normLiving - ((userLiving - 85.1) / (155.7 - 85.1))) +
+                Math.abs(county.normIncome - ((userIncome - 22054) / (134609 - 22045))) +
+                Math.abs(county.normRent - ((userRent - 456) / (2704 - 456))) +
+                Math.abs(county.normJan - ((userJan - 5.7) / (66.2 - 5.7))) +
+                Math.abs(county.normJuly - ((userJuly - 60.3) / (88.7 - 60.3)))
             );
         }
 
