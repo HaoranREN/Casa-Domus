@@ -140,3 +140,9 @@ function applyGradient(map){
 	  return { fillColor: col,  strokeWeight: 1, fillOpacity: 1};
 	});
 }
+
+function addLegend(map,iconName){
+   var legend = document.createElement('div');
+   legend.innerHTML = '<img style:"width:100px;height:100px" src="' + iconName + '"></img>'
+   map.controls[google.maps.ControlPosition.LEFT_TOP].push(legend);
+}
