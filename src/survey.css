@@ -1,29 +1,34 @@
-#grad {
-    min-height: 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background: #b4f5ea;
-    background-repeat:no-repeat;
-    background: -webkit-linear-gradient( to left top, #80b4da, #3979a6);
-    background: -moz-linear-gradient( to left top, #80b4da, #3979a6);
-    background: -ms-linear-gradient( to left top, #80b4da, #3979a6);
-    background: -o-linear-gradient( to left top, #80b4da, #3979a6);
-    background: linear-gradient( to left top, #80b4da, #3979a6);
+.header{
+    padding-top: : 20px;
+    background: #ffffff ;
 }
 
-/*
-  Original colors
-  #066e89
-  #a1f2cf
+h1
+{
+    border-bottom:1px solid #CCC;
+    padding-left: 25px;
+    padding-bottom:3px;
+    -webkit-box-shadow:0px 1px 1px #7c7a7a;
+    -moz-box-shadow:0px 1px 1px #7c7a7a;
+    box-shadow:0px 1px 1px #7c7a7a;
+}
 
-  New colors
-  #3979a6 (dark)
-  #80b4da (light)
-*/
+/* Page content */
+.content {
+  padding: 16px;
+}
 
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
 
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
 
 #table
 {
