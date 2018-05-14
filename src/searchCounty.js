@@ -56,7 +56,7 @@ function searchCounty(countyToSearch) {
     var normJan = null;
     var normJuly = null;
 
-    // Find area name in rentJSON
+    // Find area name in everythingJSON
     for (var key = 0; key < everythingJSON.length; key++) {
         if (countyToSearch === everythingJSON[key].geoID) {
             state = everythingJSON[key].state;
@@ -96,13 +96,8 @@ function searchCounty(countyToSearch) {
         medianHHIncome: medianHHIncome,
         medianProperty: medianProperty,
         rent1bed: rent1bed,
-        rent4bed: rent4bed,
         costOfLiving: costOfLiving,
-        costOfGroceries: costOfGroceries,
-        population: population,
-        hu2010: hu2010,
         geoID: geoID,
-        fips2010: fips2010,
         fipsTxt: fipsTxt,
         jan: jan,
         july: july,

@@ -60,6 +60,11 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
             // );
 
             // Normalized Manhattan Distance
+            // Normalization Process:
+            //   distance component = abs(county.normData - user.normData)
+            //
+            //   For:
+            //     user.normData = (userInput - minData) / (maxData - minData)
             var dist = (
                 Math.abs(county.normProp - ((userProperty - 33000) / (871500 - 33000))) +
                 Math.abs(county.normLiving - ((userLiving - 85.1) / (155.7 - 85.1))) +
