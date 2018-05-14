@@ -24,15 +24,3 @@ window.onclick = function(event) {
     }
 } 
 
-$scope.slider = {
-  minValue: 20000,
-  maxValue: 110000,
-  options: {
-    ceil: 200000,
-    showSelectionBar: true,
-    selectionBarGradient: {
-      from: 'white',
-      to: '#FC0'
-    }
-  }
-};
