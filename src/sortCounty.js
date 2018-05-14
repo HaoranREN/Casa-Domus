@@ -22,24 +22,6 @@
 //      userResults[0].areaName; -> County and state name of the closest matched county
 //      userResults[3].medianProperty; -> Median property value of the 4th closest matched county
 
-const MIN_PROP = 33000;
-const MAX_PROP = 871500;
-
-const MIN_LIVING = 85.1;
-const MAX_LIVING = 155.7;
-
-const MIN_INCOME = 22054;
-const MAX_INCOME = 134609;
-
-const MIN_RENT = 456;
-const MAX_RENT = 2704;
-
-const MIN_JAN = 5.7;
-const MAX_JAN = 66.2;
-
-const MIN_JULY = 60.3;
-const MAX_JULY = 88.7;
-
 var calculateDistance = function (userIncome, userProperty, userLiving, userRent, userJan, userJuly) {
     // contains candidate county to compare against
     var county = null;
@@ -80,13 +62,16 @@ var calculateDistance = function (userIncome, userProperty, userLiving, userRent
             // Normalized Manhattan Distance
             // Normalization Process:
             //   distance component = abs(county.normData - user.normData)
+            //
+            //   For:
+            //     user.normData = (userInput - minData) / (maxData - minData)
             var dist = (
-                Math.abs(county.normProp - ((userProperty - MIN_PROP) / (MAX_PROP - MIN_PROP))) +
-                Math.abs(county.normLiving - ((userLiving - MIN_LIVING) / (MAX_LIVING - MIN_LIVING))) +
-                Math.abs(county.normIncome - ((userIncome - MIN_INCOME) / (MAX_INCOME - MAX_INCOME))) +
-                Math.abs(county.normRent - ((userRent - MIN_RENT) / (MAX_RENT - MIN_RENT))) +
-                Math.abs(county.normJan - ((userJan - MIN_JAN) / (MAX_JAN - MIN_JAN))) +
-                Math.abs(county.normJuly - ((userJuly - MIN_JULY) / (MIN_JULY - MIN_JULY)))
+                Math.abs(county.normProp - ((userProperty - 33000) / (871500 - 33000))) +
+                Math.abs(county.normLiving - ((userLiving - 85.1) / (155.7 - 85.1))) +
+                Math.abs(county.normIncome - ((userIncome - 22054) / (134609 - 22045))) +
+                Math.abs(county.normRent - ((userRent - 456) / (2704 - 456))) +
+                Math.abs(county.normJan - ((userJan - 5.7) / (66.2 - 5.7))) +
+                Math.abs(county.normJuly - ((userJuly - 60.3) / (88.7 - 60.3)))
             );
         }
 
