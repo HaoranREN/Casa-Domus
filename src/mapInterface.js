@@ -68,8 +68,8 @@ function initializeMap(divName) {
 
   //get the html and set style where the map will be
   var mapDiv = document.getElementById(divName);
-  mapDiv.style.width = '100%';
-  mapDiv.style.height = '100%';
+  mapDiv.style.width = '50%';
+  mapDiv.style.height = '50%';
       
   //Make a map and set some variables for it
   var map = new google.maps.Map(mapDiv, {
