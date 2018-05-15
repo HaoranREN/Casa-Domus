@@ -6,43 +6,160 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <meta charset="UTF-8">
   <link rel="stylesheet" href="survey.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Quicksand|Open+Sans|Cabin|Roboto:300" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300,300italic,400italic,700italic,800italic,600italic,600' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300,300italic,400italic,700italic,800italic,600italic,600'
+    rel='stylesheet' type='text/css'>
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
   <link rel='stylesheet prefetch' href='http://www.justinaguilar.com/animations/css/animations.css'>
-  
+
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
   <script src="https://maps.google.com/maps/api/js?v=3&key=AIzaSyB0vnW0Sd48sd0msALTLt3vGWIMwnwLBG4" type="http://text/javascript"></script>
 
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-<script  src="survey.js"></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+  <script src="survey.js"></script>
   <title>Casa Domus</title>
 
   <div style="font-family: 'Quicksand', sans-serif;" letter-spacing: 4px>
-  <div class="header" id="myHeader" >
-    <h1> <img src="house.png" height="32" width="32"> Casa Domus</h1>
-  </div>
+    <div class="header" id="myHeader">
+      <h1>
+        <img src="house.png" height="32" width="32"> Casa Domus</h1>
+    </div>
 
-  <script>
-    $(document).ready(function(){
-      $("button").click(function(){
-      	$('.removeMe').remove();
-        $("#div1").fadeIn(1500);
-        $("#survey").fadeIn(3000);
-        
+    <script>
+      $(document).ready(function () {
+        $("button").click(function () {
+          $('.removeMe').remove();
+          $("#div1").fadeIn(1500);
+          $("#survey").fadeIn(3000);
+
+        });
       });
-	});
-  </script>
+    </script>
 
 </header>
 
 <body>
   <div class="content">
+    <center>
+      <div style="font-family: 'Roboto', sans-serif;" letter-spacing: 4px>
+        <br>
+        <font size="7" color="black">Let's find a neighborhood just for you!
+      </div>
+
+      <div class="removeMe">
+        <font size="7" color="white">
+          <br>
+          <button type="button" class="btn btn-danger btn-lg" id="myBtn" onclick="this.style.display = 'none'">START HERE</button>
+        </font>
+      </div>
+
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+        <font size="4">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <p>
+              We never track, store, or give out your information.
+              <br /> That's why we don't have user accounts.
+              <br /> So anything you put down remains anonymous and private :)
+              <br />
+            </p>
+
+          </div>
+      </div>
+
+      <div id="div1" style="display:none">
+        <font size="6">A few questions to get you started.</font>
+        <br>
+        <br>
+
+        <!- Angularjs View ->
+        <div ng-app="mainApp" ng-controller="surveyController">
+
+          <!- Input ->
+
+          <div style="font-family: 'Roboto', sans-serif;" letter-spacing: 4px>
+            <div class="container-fluid">
+              <font size="5">
+
+                <div class="row align-items-center">
+                  <div class="col-sm-6 align-self-start">What's your current median household income?</div>
+                  <div class="col-sm-6">
+                    <input type="range" min="22045" max="134609" value="78327" class="slider" ng-model="userIncome"> {{userIncome | currency}}
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row align-items-center">
+                  <div class="col-sm-6 align-self-start">How much property value can you afford?</div>
+                  <div class="col-sm-6">
+                    <input type="range" min="33000" max="871500" value="452250" class="slider" ng-model="userProperty"> {{userProperty | currency}}
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row align-items-center">
+                  <div class="col-sm-6 align-self-start">Cost of Living Index: How far do you want your dollar to go? (average is 100)</div>
+                  <div class="col-sm-6">
+                    <input type="range" min="85.1" max="155.7" value="120.4" class="slider" ng-model="userLiving"> {{userLiving}}
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row align-items-center">
+                  <div class="col-sm-6">How much can you spend on rent per month?</div>
+                  <div class="col-sm-6">
+                    <input type="range" min="456" max="2704" value="1580" class="slider" ng-model="userRent"> {{userRent | currency}}
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row align-items-center">
+                  <div class="col-sm-6">How hot do you want it to be in the summer?</div>
+                  <div class="col-sm-6">
+                    <input id="summerTemp" type="range" min="60.3" max="88.7" value="74.5" class="slider" ng-model="userJuly"> {{userJuly}}&deg
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="row align-items-center">
+                  <div class="col-sm-6">How cold do you want it be in the winter?</div>
+                  <div class="col-sm-6">
+                    <input type="range" min="5.7" max="66.2" value="35.95" class="slider" ng-model="userJan"> {{userJan}}&deg
+                  </div>
+                </div>
+
+              </font>
+
+            </div>
+            <br>
+            <font size="7" color="white">
+              <button type="button" class="btn btn-danger btn-lg" ng-click="openMap()">Find My Match!</button>
+            </font>
+          </div>
+          </font>
+          <br>
+          <br>
+          <br>
+
+        </div>
+        <!-- div1 display none div tag-->
+    </center>
+    </content>
+=======
   <center>
     <div style="font-family: 'Roboto', sans-serif;" letter-spacing: 4px>
     <br>
@@ -164,7 +281,7 @@
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-<script  src="survey.js"></script>
+<script src="survey.js"></script>
 <script>
   var userResults = [];
 
@@ -173,32 +290,32 @@
 
   mainApp.controller('surveyController', function ($scope) {
 
-  // User values (default values)
-  $scope.userIncome = 78327;
-  $scope.userProperty = 452250;
-  $scope.userLiving = 120.4;
-  $scope.userRent = 1580;
-  $scope.userJan = 35.95;
-  $scope.userJuly = 74.5;
+    // User values (default values)
+    $scope.userIncome = 78327;
+    $scope.userProperty = 452250;
+    $scope.userLiving = 120.4;
+    $scope.userRent = 1580;
+    $scope.userJan = 35.95;
+    $scope.userJuly = 74.5;
 
-  $scope.openMap = function () {
-  // go to maps page, bring the results of the questionnaire
-    map_url = "map.html?income="
-    + String($scope.userIncome) + "&property="
-    + String($scope.userProperty) + "&living="
-    + String($scope.userLiving) + "&rent="
-    + String($scope.userRent) + "&jan="
-    + String($scope.userJan) + "&july="
-    + String($scope.userJuly);
+    $scope.openMap = function () {
+      // go to maps page, bring the results of the questionnaire
+      map_url = "map.html?income="
+        + String($scope.userIncome) + "&property="
+        + String($scope.userProperty) + "&living="
+        + String($scope.userLiving) + "&rent="
+        + String($scope.userRent) + "&jan="
+        + String($scope.userJan) + "&july="
+        + String($scope.userJuly);
 
-    window.location.href = map_url;
+      window.location.href = map_url;
     };
   });
 </script>
 
 <!--sticky header bar -->
 <script>
-  window.onscroll = function() {myFunction()};
+  window.onscroll = function () { myFunction() };
 
   var header = document.getElementById("myHeader");
   var sticky = header.offsetTop;
