@@ -14,3 +14,5 @@ This contains our meeting agendas written before every meeting that is held
 This contains our formal documentation. Formal documentation is written before any meeting with the customer, and will be uploaded once we recieve an agreement from the customer.
 #### src
 This contains the actual code. This directory is reserved for the implementation of the webservice.
+#### Prototyping
+This contains any code that created seperately from the src folder. Code in this folder that contributes to the final code is integrated after the prototype is fully tested. Some prototypes may not be used in the final product.
