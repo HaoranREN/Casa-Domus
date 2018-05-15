@@ -16,3 +16,5 @@ This contains our formal documentation. Formal documentation is written before a
 This contains the actual code. This directory is reserved for the implementation of the webservice.
 #### Prototyping
 This contains any code that created seperately from the src folder. Code in this folder that contributes to the final code is integrated after the prototype is fully tested. Some prototypes may not be used in the final product.
+#### Data
+This contains the raw csv files that were used as sources of county information in the final product.
